@@ -1,0 +1,5 @@
+   ---
+   title: How to do things with reStructuredText and Git
+   author: Peter S. Conrad
+   language: en-US
+   ...
