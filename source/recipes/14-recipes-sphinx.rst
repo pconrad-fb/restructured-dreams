@@ -3,6 +3,14 @@ Build docs with Sphinx
 
 Every page needs a title! And must be in a toctree, all or nothing
 
+toctree is a reStructuredText directive, a very versatile piece of markup. Directives can have arguments, options and content.
+
+Arguments are given directly after the double colon following the directive?s name. Each directive decides whether it can have arguments, and how many.
+
+Options are given after the arguments, in form of a ?field list?. The maxdepth is such an option for the toctree directive.
+
+Content follows the options or arguments after a blank line. Each directive decides whether to allow content, and what to do with it.
+
 Originally, Sphinx was conceived for a single project, the documentation of the Python language. Shortly afterwards, it was made available for everyone as a documentation tool, but the documentation of Python modules remained deeply built in ? the most fundamental directives, like function, were designed for Python objects. Since Sphinx has become somewhat popular, interest developed in using it for many different purposes: C/C++ projects, JavaScript, or even reStructuredText markup (like in this documentation).
 
 While this was always possible, it is now much easier to easily support documentation of projects using different programming languages or even ones not supported by the main Sphinx distribution, by providing a domain for every such purpose.

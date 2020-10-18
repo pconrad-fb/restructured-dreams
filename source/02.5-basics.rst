@@ -1,52 +1,34 @@
-reStructuredText Basics
+reStructuredText Syntax
 =======================
 
-Normally, there are no heading levels assigned to certain characters as the structure is determined from the succession of headings. However, this convention is used in Python?s Style Guide for documenting which you may follow:
+.. contents:: This is my Table of Contents
+   :depth: 2
 
-    # with overline, for parts
+reST is a markup language that intends to combine simplicity with extensibility. It accomplishes this with extension mechanisms called directives, roles, and domains. This is a mashup of common syntax. It's like a cheatsheet for quick reference. There is some freedom with reStructuredText that allows you to pick different characters for creating headers and bulleted lists. As long as you are consistent throughout your document it will interpret the headers automatically. This example uses my preferred characters and styling for headings.
 
-    \* with overline, for chapters
+A domain is a collection of markup (reStructuredText directives and roles) to describe and link to objects belonging together.
 
-    =, for sections
+The basics
+--------------
 
-    -, for subsections
+There's a lot to cover. You can do all kinds of things. There are tons of roles and directives, and you can create your own. There are domwins, there's all this stuff, but we're just going to cover the basics. We'll talk about a few (not all) directives and a few roles.
 
-    ^, for subsubsections
+There are some problems one commonly runs into while authoring reST documents:
 
-    ", for paragraphs
+* **Separation of inline markup:** As said above, inline markup spans must be separated from the surrounding text by non-word characters, you have to use a backslash-escaped space to get around that. See [the reference](http://docutils.sourceforge.net/docs/ref/rst/restructuredtext.html#substitution-definitions) for the details.
 
-The stupid underline has to be as long as the title
+* **No nested inline markup:** Something like `*see :func:`foo`*` is not possible.
 
-http://rst.ninjs.org/#
+* All reST files use an indentation of 3 spaces; no tabs are allowed.  The maximum line length is 80 characters for normal text, but tables,  deeply indented code samples and long links may extend beyond that. Code example bodies should use normal Python 4-space indentation.
 
-https://build-me-the-docs-please.readthedocs.io/en/latest/Using_Sphinx/OnReStructuredText.html
-
-https://docutils.sourceforge.io/rst.html
-
-A reStructuredText document is simply a plain text file with some markup to specify the format or the semantics of the text.
-
-
-
-
-
-reStructuredText directives
-
-toctree is a reStructuredText directive, a very versatile piece of markup. Directives can have arguments, options and content.
-
-Arguments are given directly after the double colon following the directive?s name. Each directive decides whether it can have arguments, and how many.
-
-Options are given after the arguments, in form of a ?field list?. The maxdepth is such an option for the toctree directive.
-
-Content follows the options or arguments after a blank line. Each directive decides whether to allow content, and what to do with it.
+  Make generous use of blank lines where applicable; they help group things together.
 
 A common gotcha with directives is that the first line of the content must be indented to the same level as the options are.
 
-There are two types of markup:
-
-    inline markup: for example, *the surrounding asterisks would mark this text as italics*, like this.
-    explicit markup: is used for text that need special handling, such as footnotes, tables, or generic directives. Explicit markup blocks always start with .. followed by whitespace.
-
 Paragraphs
+^^^^^^^^^^
+
+The paragraph is the most basic block in a reST document.  Paragraphs are simply chunks of text separated by one or more blank lines.  As in Python, indentation is significant in reST, so all lines of the same paragraph must be left-aligned to the same level of indentation.
 
 The paragraph is the basic block in a reST document.
 
@@ -80,64 +62,29 @@ Line blocks are a way of preserving line breaks (the equivalent of using Shift+E
 | broken exactly like in
 | the source file.
 
-Sections
 
-Section are created by underlining (and optionally overlining) the section title with a punctuation character:
 
-This is a heading
-=================
+Headings
+^^^^^^^^
 
-Any punctuation character can be used to define a section title. The underlining (and overlining) must be at least as long as the text itself. Sections must be properly nested.
+Normally, there are no heading levels assigned to certain characters as the structure is determined from the succession of headings. However, this convention is used in Python?s Style Guide for documenting which you may follow:
 
-This is a style convention.
+    # with overline, for parts
 
-Use the following punctuation characters in the section titles:
+    \* with overline, for chapters
 
-    # for Parts
-    * for Chapters
-    = for sections (?Heading 1?)
-    - for subsections (?Heading 2?)
-    ^ for subsubsections (?Heading 3?)
-    " for paragraphs (?Heading 4?)
+    =, for sections
 
-Please note that, when converting to HTML format, sections are automatically converted to an appropriate heading tag (for example: <h2>Heading text</h2>).
+    -, for subsections
 
-When converting to ODT or DOCX, an appropriate Heading style is applied.
-Inline markup
-Bold, italics, monospace
+    ^, for subsubsections
 
-The markup is quite simple:
+    ", for paragraphs
 
-    use one asterisk for italics: *text* (the equivalent of using Ctrl+i in Microsoft Word or LibreOffice Writer),
-    use two asterisks for strong emphasis (boldface): **text**
-    use backquotes for text literals: ``text``
+The stupid underline has to be as long as the title
 
-Be aware of some restrictions:
-
-    The markup may not be nested. For example, this markup is wrong: *italics with **bold** inside*
-    The text content within the markup may not start or end with whitespace. For example, this markup is wrong: * text*
-    The markup must be separated from surrounding text by non-word characters (whitespace or punctuation). Use a backslash-escaped-space to work around that. For example: thisis\ *one*\ word is rendered like thisisoneword.
-    If asterisks or backquotes appear in running text and could be confused with inline markup delimiters, they have to be escaped with a backslash.
-
-Subscript and superscript
-
-Subscript is marked with :sub:`subscript text`. Superscript is marked with :sup:`superscript text`.
-
-This is a tip.
-
-Whitespace or punctuation is required around interpreted text, but often not desired with subscripts & superscripts. Backslash-escaped whitespace can be used; the whitespace will be removed from the processed document:
-
-The chemical formula for molecular oxygen is O\ :sub:`2`.
-
-To improve the readability of the text, the use backslash-escapes is discouraged. If possible, use Substitutions instead:
-
-The chemical formula for pure water is |H2O|.
-
-.. |H2O| replace:: H\ :sub:`2`\ O
-
-Keep all substitutions together (e.g. at the end of the file).
 Lists
-Bulleted lists
+^^^^^
 
 List markup is natural: just place an asterisk at the start of a paragraph and indent properly:
 
@@ -164,6 +111,633 @@ The same goes for numbered lists; they can also be auto-numbered using a # sign:
 
 #. This is a numbered list.
 #. It has two items too.
+
+
+
+
+
+Inline markup
+^^^^^^^^^^^^^
+
+The standard reST inline markup is quite simple: use
+
+* one asterisk: `*text*` for emphasis (italics),
+* two asterisks: `**text**` or `:strong:`text`` for strong emphasis (boldface), and
+* backquotes: ```text``` for code samples.
+
+With inline markup you can do all the normal stuff 
+
+- emphasis
+- strong emphasis
+- literals
+- various kinds of literals and interpreted text
+
+- Recognition rules
+
+  - The inline markup recognition rules were devised to allow 90% of non-markup uses of "*", "`", "_", and "|" without escaping. 
+  - Be aware of some restrictions of this markup:
+
+    * it may not be nested,
+    * content may not start or end with whitespace: `* text*` is wrong,
+    * it must be seperated from surrounding text by non-word characters.  Use a backslash escaped space to work around that: `thisis\ *one*\ word`.
+  - Inline markup start-strings and end-strings are only recognized if the following conditions are met:
+    1. Inline markup start-strings must be immediately followed by non-whitespace.
+    2. Inline markup end-strings must be immediately preceded by non-whitespace.
+    3. The inline markup end-string must be separated by at least one character from the start-string.
+    4. Both, inline markup start-string and end-string must not be preceded by an unescaped backslash (except for the end-string of [inline literals](https://docutils.sourceforge.io/docs/ref/rst/restructuredtext.html#inline-literals)). See [Escaping Mechanism](https://docutils.sourceforge.io/docs/ref/rst/restructuredtext.html#escaping-mechanism) above for details.
+    5. If an inline markup start-string is immediately preceded by one of the ASCII characters `' " < ( [ {` or a similar non-ASCII character [[11\]](https://docutils.sourceforge.io/docs/ref/rst/restructuredtext.html#openers), it must not be followed by the corresponding closing character from `' " ) ] } >` or a similar non-ASCII character [[12\]](https://docutils.sourceforge.io/docs/ref/rst/restructuredtext.html#closers). (For quotes, matching characters can be any of the [quotation marks in international usage](http://en.wikipedia.org/wiki/Quotation_mark,_non-English_usage).)
+
+- Recognition order
+
+  - Asterisks: [Strong emphasis](https://docutils.sourceforge.io/docs/ref/rst/restructuredtext.html#strong-emphasis) ("**") is recognized before [emphasis](https://docutils.sourceforge.io/docs/ref/rst/restructuredtext.html#emphasis) ("*").
+  - Backquotes: [Inline literals](https://docutils.sourceforge.io/docs/ref/rst/restructuredtext.html#inline-literals) ("``"), [inline internal targets](https://docutils.sourceforge.io/docs/ref/rst/restructuredtext.html#inline-internal-targets) (leading "_`", trailing "`"), are mutually independent, and are recognized before phrase [hyperlink references](https://docutils.sourceforge.io/docs/ref/rst/restructuredtext.html#hyperlink-references) (leading "`", trailing "`_") and [interpreted text](https://docutils.sourceforge.io/docs/ref/rst/restructuredtext.html#interpreted-text) ("`").
+  - Trailing underscores: Footnote references ("[" + label + "]_") and simple [hyperlink references](https://docutils.sourceforge.io/docs/ref/rst/restructuredtext.html#hyperlink-references) (name + trailing "_") are mutually independent.
+  - Vertical bars: [Substitution references](https://docutils.sourceforge.io/docs/ref/rst/restructuredtext.html#substitution-references) ("|") are independently recognized.
+  - [Standalone hyperlinks](https://docutils.sourceforge.io/docs/ref/rst/restructuredtext.html#standalone-hyperlinks) are the last to be recognized.
+
+- Character-level inline markup
+
+  - It is possible to mark up individual characters within a word with backslash escapes (see [Escaping Mechanism](https://docutils.sourceforge.io/docs/ref/rst/restructuredtext.html#escaping-mechanism) above).  Backslash escapes can be used to allow arbitrary text to immediately follow inline markup:
+
+::
+    
+    Python ``list``\s use square bracket syntax.
+    
+
+    The backslash will disappear from the processed document.  The word "list" will appear as inline literal text, and the letter "s" will immediately follow it as normal text, with no space in-between.
+
+    Arbitrary text may immediately precede inline markup using backslash-escaped whitespace:
+
+::
+    
+    Possible in *re*\ ``Structured``\ *Text*, though not encouraged.
+    
+
+    The backslashes and spaces separating "re", "Structured", and "Text" above will disappear from the processed document.
+
+    Caution!
+
+    The use of backslash-escapes for character-level inline markup is not encouraged.  Such use is ugly and detrimental to the unprocessed document's readability.  Please use this feature sparingly and only where absolutely necessary.
+
+
+
+Interpreted text
+----------------
+
+Syntax:
+
+.. code::
+
+   :role:`text` 
+
+Interpreted text is text that is meant to be related, indexed, linked, summarized, or otherwise processed, but the text itself is typically left alone.  Interpreted text is enclosed by single backquote characters. The "role" of the interpreted text determines how the text is interpreted.  The role may be inferred implicitly (as above; the "default role" is used) or indicated explicitly, using a role marker. A role marker consists of a colon, the role name, and another colon. A role name is a single word consisting of alphanumerics plus internal hyphens, underscores, and periods; no whitespace or other characters are allowed.  A role marker is either a prefix or a suffix to the interpreted text, whichever reads better; it's up to the author. Interpreted text allows extensions to the available inline descriptive markup constructs.  To [emphasis](https://docutils.sourceforge.io/0.4/docs/ref/rst/restructuredtext.html#emphasis), [strong emphasis](https://docutils.sourceforge.io/0.4/docs/ref/rst/restructuredtext.html#strong-emphasis), [inline literals](https://docutils.sourceforge.io/0.4/docs/ref/rst/restructuredtext.html#inline-literals), and [hyperlink references](https://docutils.sourceforge.io/0.4/docs/ref/rst/restructuredtext.html#hyperlink-references), we can add "title reference", "index entry", "acronym", "class", "red", "blinking" or anything else we want.  Only pre-determined roles are recognized; unknown roles will generate errors.  A core set of standard roles is implemented in the reference parser; see [reStructuredText Interpreted Text Roles](https://docutils.sourceforge.io/0.4/docs/ref/rst/roles.html) for individual descriptions.  In addition, applications may support specialized roles.
+
+[Standard Roles](https://docutils.sourceforge.io/docs/ref/rst/roles.html#standard-roles)
+
+* [`:emphasis:`](https://docutils.sourceforge.io/docs/ref/rst/roles.html#emphasis)
+* [`:literal:`](https://docutils.sourceforge.io/docs/ref/rst/roles.html#literal)
+* [`:code:`](https://docutils.sourceforge.io/docs/ref/rst/roles.html#code)
+* [`:math:`](https://docutils.sourceforge.io/docs/ref/rst/roles.html#math)
+* [`:pep-reference:`](https://docutils.sourceforge.io/docs/ref/rst/roles.html#pep-reference)
+* [`:rfc-reference:`](https://docutils.sourceforge.io/docs/ref/rst/roles.html#rfc-reference)
+* [`:strong:`](https://docutils.sourceforge.io/docs/ref/rst/roles.html#strong)
+* [`:subscript:`](https://docutils.sourceforge.io/docs/ref/rst/roles.html#subscript)
+* [`:superscript:`](https://docutils.sourceforge.io/docs/ref/rst/roles.html#superscript)
+* [`:title-reference:`](https://docutils.sourceforge.io/docs/ref/rst/roles.html#title-reference)
+
+[Specialized Roles](https://docutils.sourceforge.io/docs/ref/rst/roles.html#specialized-roles)
+
+* [`raw`]
+
+Do examples of the roles
+
+Whitespace or punctuation is required around interpreted text, but often not desired with subscripts & superscripts. Backslash-escaped whitespace can be used; the whitespace will be removed from the processed document:
+
+To improve the readability of the text, the use backslash-escapes is discouraged. If possible, use Substitutions instead:
+
+The chemical formula for pure water is |H2O|.
+
+.. |H2O| replace:: H\ :sub:`2`\ O
+
+
+
+
+Explicit markup
+---------------
+
+Explicit markup blocks are used for constructs which float    (footnotes), have no direct paper-document representation    (hyperlink targets, comments), or require specialized processing    (directives).  They all begin with two periods and whitespace, the    "explicit markup start". 
+
+Syntax:
+
+.. code::
+
+   .. 
+
+Two periods plus a space, the "explicit markup start". Types of explicit markup include footnotes, citations, hyperlink targets, directives, substitution definitions. Any text which begins with an explicit markup start but doesn't    use the syntax of any of the constructs above, is a comment.
+
+We'll do a few useful examples of explicit markup with more detail below. We won't talk about all of it, because there's plenty of reference online and the hope is that you can figure it out once you know how it works
+
++--------------------------+------------------------------------------+
+|  Element                 |  Syntax                                  |
++==========================+==========================================+
+|  Substitution definition |  ``.. |text| replacement``               |
++--------------------------+------------------------------------------+
+|  Cross-reference target  |  ``.. _label:``                          |
+|                          |                                          |
+|                          |  ``Paragraph``                           |
++--------------------------+------------------------------------------+
+|  Link target             |  ``.. _label: URL``                      |
++--------------------------+------------------------------------------+
+|  Footnote or citation    |  ``.. [label] Footnote or citation text``|
++--------------------------+------------------------------------------+
+
+When yoiu look at links below you'll see it's all explicit markup for the targets
+
+Directives
+^^^^^^^^^^
+
+One type of explicit markup called a *directive* marks a block of text for a particular purpose: a sidebar, topic, admonition, or image, for example. We'll do some examples with more detail below, to show you how to do things like sidebars, topics, admonitions, etc. We eon't cover all of them though. 
+
+.. code::
+
+   .. directive-name:: arguments     
+      :option-name: option-values      
+
+      body
+
+http://rst.ninjs.org/#
+
+https://build-me-the-docs-please.readthedocs.io/en/latest/Using_Sphinx/OnReStructuredText.html
+
+https://docutils.sourceforge.io/rst.html
+
+A reStructuredText document is simply a plain text file with some markup to specify the format or the semantics of the text.
+
+Standard directives
+""""""""""""""""""""
+
+Admonitions: attention, caution, danger, error, hint, important, note, tip, warning and the generic admonition. (Most themes style only note and warning specially.)
+
+Images:
+    image - see the images section;
+    figure - an image with caption and optional legend.
+Additional body elements:
+    contents <table-of-contents> - a local table of contents for the sections in the current file only;
+    rubric - a heading without relation to the document?s sections that won?t be included in any table of contents;
+    topic and sidebar - special highlighted body elements;
+    epigraph - a block quote with optional attribution line;
+    container - a container with a custom class, useful to generate an outer ``<div>`` in HTML output.
+Special tables:
+    table - a table with title;
+    csv-table - a table generated from comma-separated values;
+    list-table - a table generated from a list of lists.
+Special directives:
+    include - include reStructuredText from another file;
+    raw - include raw target-format markup, such as LaTeX;
+    class - assign a class attribute to the next element.
+
+Links 
+-----
+
+You can link  to websites, files, or places in your documents.
+
+Hyperlink references are indicated by a trailing underscore, "_", except for [standalone hyperlinks](https://docutils.sourceforge.io/docs/ref/rst/restructuredtext.html#standalone-hyperlinks) which are recognized independently.  The underscore can be thought of as a right-pointing arrow.  The trailing underscores point away from hyperlink references, and the leading underscores point toward [hyperlink targets](https://docutils.sourceforge.io/docs/ref/rst/restructuredtext.html#hyperlink-targets).
+
+
+
+Hyperlinks
+^^^^^^^^^^
+
+Hyperlinks consist of two parts.  In the text body, there is a source link, a reference name with a trailing underscore (or two underscores for [anonymous hyperlinks](https://docutils.sourceforge.io/docs/ref/rst/restructuredtext.html#anonymous-hyperlinks)):
+
+.. code ::
+
+   See the Python_ home page for info.
+
+
+A target link with a matching reference name must exist somewhere else in the document.  See [Hyperlink Targets](https://docutils.sourceforge.io/docs/ref/rst/restructuredtext.html#hyperlink-targets) for a full description).
+
+[Anony
+
+mous hyperlinks](https://docutils.sourceforge.io/docs/ref/rst/restructuredtext.html#anonymous-hyperlinks) (which see) do not use reference names to match references to targets, but otherwise behave similarly to named hyperlinks.
+
+A hyperlink reference may directly embed a target URI or (since Docutils 0.11) a hyperlink reference within angle brackets ("<...>") as follows:
+
+.. code ::
+
+   See the `Python home page <http://www.python.org>`_ for info.
+
+   This `link <Python home page_>`_ is an alias to the link above.
+
+
+This is exactly equivalent to:
+
+.. code ::
+
+   See the `Python home page`_ for info.
+
+   This link_ is an alias to the link above.
+
+   .. _Python home page: http://www.python.org
+   .. _link: `Python home page`_
+
+
+The bracketed URI must be preceded by whitespace and be the last text before the end string.
+
+
+There are multiple ways to make links:
+
+- By adding an underscore after a word : Github_ and by adding the target URL after the text (this way has the advantage of not inserting unnecessary URLs in the visible text).
+- By typing a full comprehensible URL : https://github.com/ (will be automatically converted to a link)
+- By making a more Markdown-like link: \`Github <https://github.com/>`_ .
+
+* Named hyperlink references:
+
+  * No start-string, end-string = "_".
+  * Start-string = "\`", end-string = "\`_".  (Phrase references.)
+  * 
+* Anonymous hyperlink references:
+
+  * No start-string, end-string = "__".
+  * Start-string = "\`", end-string = "\`__".  (Phrase references.)
+
+
+.. _Github: https://github.com/
+
+With hyperlinks, the underscore kind of symbolizes an arrow. 
+
+Indirect hyperlinks
+^^^^^^^^^^^^^^^^^^^
+
+Indirect hyperlink targets have a hyperlink reference in their link blocks. In the following example, target "one" indirectly references whatever target "two" references, and target "two" references target "three", an internal hyperlink target. In effect, all three reference the same thing:
+
+.. _one: two_
+.. _two: three_
+.. _three:
+
+
+Implicit hyperlinks
+^^^^^^^^^^^^^^^^^^^
+
+Section titles, footnotes, and citations automatically generate    hyperlink targets (the title text or footnote/citation label is    used as the hyperlink name).     
+
+So that means you can just link to it with like `Implicit hyperlinks`_
+
+Internal links
+^^^^^^^^^^^^^^^
+
+Internal crossreferences, like this:
+
+
+.. code ::
+
+   Here is an example_.
+
+   .. _example:         
+
+   This is an example crossreference target.  
+
+Inline internal targets are the equivalent of explicit [internal hyperlink targets](https://docutils.sourceforge.io/docs/ref/rst/restructuredtext.html#internal-hyperlink-targets), but may appear within running text.  The syntax begins with an underscore and a backquote, is followed by a hyperlink name or phrase, and ends with a backquote.  Inline internal targets may not be anonymous.
+
+For example, the following paragraph contains a hyperlink target named "Norwegian Blue":
+
+```
+Oh yes, the _`Norwegian Blue`.  What's, um, what's wrong with it?
+```
+
+See [Implicit Hyperlink Targets](https://docutils.sourceforge.io/docs/ref/rst/restructuredtext.html#implicit-hyperlink-targets) for the resolution of duplicate reference names.
+
+Using :ref: is advised over standard reStructuredText implicit links to sections (like \`Section title`_) because it works across files, when section headings are changed, and for all builders that support cross-references.
+
+Images
+--------
+
+An "image" is a simple picture:
+
+.. image:: picture.png
+
+Inline images can be defined with an "image" directive in a substitution definition
+
+The URI for the image source file is specified in the directive argument. As with hyperlink targets, the image URI may begin on the same line as the explicit markup start and target name, or it may begin in an indented text block immediately following, with no intervening blank lines. If there are multiple lines in the link block, they are stripped of leading and trailing whitespace and joined together.
+
+Optionally, the image link block may contain a flat field list, the image options. For example:
+
+::
+
+    .. image:: picture.jpeg
+       :height: 100px
+       :width: 200 px
+       :scale: 50 %
+       :alt: alternate text
+       :align: right
+
+The following options are recognized:
+
+alt : text
+    Alternate text: a short description of the image, displayed by applications that cannot display images, or spoken by applications for visually impaired users.
+height : length
+    The desired height of the image. Used to reserve space or scale the image vertically. When the "scale" option is also specified, they are combined. For example, a height of 200px and a scale of 50 is equivalent to a height of 100px with no scale.
+width : length or percentage of the current line width
+    The width of the image. Used to reserve space or scale the image horizontally. As with "height" above, when the "scale" option is also specified, they are combined.
+scale : integer percentage (the "%" symbol is optional)
+
+    The uniform scaling factor of the image. The default is "100 %", i.e. no scaling.
+
+    If no "height" or "width" options are specified, the Python Imaging Library (PIL) may be used to determine them, if it is installed and the image file is available.
+align : "top", "middle", "bottom", "left", "center", or "right"
+    The alignment of the image, equivalent to the HTML <img> tag's deprecated "align" attribute or the corresponding "vertical-align" and "text-align" CSS properties. The values "top", "middle", and "bottom" control an image's vertical alignment (relative to the text baseline); they are only useful for inline images (substitutions). The values "left", "center", and "right" control an image's horizontal alignment, allowing the image to float and have the text flow around it. The specific behavior depends upon the browser or rendering software used.
+target : text (URI or reference name)
+    Makes the image into a hyperlink reference ("clickable"). The option argument may be a URI (relative or absolute), or a reference name with underscore suffix (e.g. `a name`_).
+
+and the common options :class: and :name:.
+
+A "figure" consists of image data (including image options), an optional caption (a single paragraph), and an optional legend (arbitrary body elements). For page-based output media, figures might float to a different position if this helps the page layout.
+
+:: 
+
+    .. figure:: picture.png
+       :scale: 50 %
+       :alt: map to buried treasure
+    
+       This is the caption of the figure (a simple paragraph).
+    
+       The legend consists of all elements after the caption.  In this
+       case, the legend consists of this paragraph and the following
+       table:
+    
+       +-----------------------+-----------------------+
+       | Symbol                | Meaning               |
+       +=======================+=======================+
+       | .. image:: tent.png   | Campground            |
+       +-----------------------+-----------------------+
+       | .. image:: waves.png  | Lake                  |
+       +-----------------------+-----------------------+
+       | .. image:: peak.png   | Mountain              |
+       +-----------------------+-----------------------+
+    
+There must be blank lines before the caption paragraph and before the legend. To specify a legend without a caption, use an empty comment ("..") in place of the caption.
+
+The "figure" directive supports all of the options of the "image" directive (see image options above). These options (except "align") are passed on to the contained image.
+
+align : "left", "center", or "right"
+    The horizontal alignment of the figure, allowing the image to float and have the text flow around it. The specific behavior depends upon the browser or rendering software used.
+
+In addition, the following options are recognized:
+
+figwidth : "image", length, or percentage of current line width
+
+    The width of the figure. Limits the horizontal space used by the figure. A special value of "image" is allowed, in which case the included image's actual width is used (requires the Python Imaging Library). If the image file is not found or the required software is unavailable, this option is ignored.
+
+    Sets the "width" attribute of the "figure" doctree element.
+
+    This option does not scale the included image; use the "width" image option for that.
+
+    +---------------------------+
+    |        figure             |
+    |                           |
+    |<------ figwidth --------->|
+    |                           |
+    |  +---------------------+  |
+    |  |     image           |  |
+    |  |                     |  |
+    |  |<--- width --------->|  |
+    |  +---------------------+  |
+    |                           |
+    |The figure's caption should|
+    |wrap at this width.        |
+    +---------------------------+
+
+
+
+Tables
+------
+
+
+.. code ::
+
+    =========== ========
+    Country     Capital
+    =========== ========
+    France      Paris
+    Japan       Tokyo
+    =========== ========
+    
+
+.. code ::
+
+    +--------------------------+---------------------+
+    |  Element                 |  Syntax                                  |
+    +==========================+==========================================+
+    |  Substitution definition |  ``.. |text| replacement``               |
+    +--------------------------+------------------------------------------+
+    |  Cross-reference target  |  ``.. _label:``                          |
+    |                          |                                          |
+    |                          |  ``Paragraph``                           |
+    +--------------------------+------------------------------------------+
+    |  Link target             |  ``.. _label: URL``                      |
+    +--------------------------+------------------------------------------+
+    |  Footnote or citation    |  ``.. [label] Footnote or citation text``|
+    +--------------------------+------------------------------------------+
+
+
+Special tables:
+    table - a table with title;
+    csv-table - a table generated from comma-separated values;
+    list-table - a table generated from a list of lists.
+
+Table directives
+^^^^^^^^^^^^^^^^
+
+
+Table
+"""""""
+
+The "table" directive is used to associate a title with a table or specify options, e.g.:
+
+.. code ::
+
+    .. table:: Truth table for "not"
+       :widths: auto
+    
+       =====  =====
+         A    not A
+       =====  =====
+       False  True
+       True   False
+       =====  =====
+
+The following options are recognized:
+
+    ``align : "left", "center", or "right"``
+    The horizontal alignment of the table. (New in Docutils 0.13)
+    ``widths : "auto", "grid" or a list of integers``
+    A comma- or space-separated list of column widths. The default is the width of the input columns (in characters).
+
+    The special values "auto" or "grid" may be used by writers to decide whether to delegate the determination of column widths to the backend (LaTeX, the HTML browser, ...). See also the table_style configuration option.
+
+``width : length or percentage of the current line width``
+Forces the width of the table to the specified length or percentage of the line width. If omitted, the renderer determines the width of the table based on its contents.
+and the common options :class: and :name:.
+
+CSV table directive
+"""""""""""""""""""""""
+
+The "csv-table" directive is used to create a table from CSV (comma-separated values) data. CSV is a common data format generated by spreadsheet applications and commercial databases. The data may be internal (an integral part of the document) or external (a separate file).
+
+Example:
+
+.. code ::
+
+    .. csv-table:: Frozen Delights!
+       :header: "Treat", "Quantity", "Description"
+       :widths: 15, 10, 30
+    
+       "Albatross", 2.99, "On a stick!"
+       "Crunchy Frog", 1.49, "If we took the bones out, it wouldn't be
+       crunchy, now would it?"
+       "Gannet Ripple", 1.99, "On a stick!"
+
+Block markup and inline markup within cells is supported. Line ends are recognized within cells.
+
+Working limitations:
+
+    There is no support for checking that the number of columns in each row is the same. However, this directive supports CSV generators that do not insert "empty" entries at the end of short rows, by automatically adding empty entries.
+
+List table directive
+""""""""""""""""""""
+
+The "list-table" directive is used to create a table from data in a uniform two-level bullet list. "Uniform" means that each sublist (second-level list) must contain the same number of list items.
+
+Example:
+
+::
+
+    .. list-table:: Frozen Delights!
+       :widths: 15 10 30
+       :header-rows: 1
+    
+       * - Treat
+         - Quantity
+         - Description
+       * - Albatross
+         - 2.99
+         - On a stick!
+       * - Crunchy Frog
+         - 1.49
+         - If we took the bones out, it wouldn't be
+           crunchy, now would it?
+       * - Gannet Ripple
+         - 1.99
+         - On a stick!
+
+
+
+Footnotes
+---------
+
+For footnotes, use \[#name]_ to mark the footnote location, and add the footnote body at the bottom of the document after a ?Footnotes? rubric heading, like so:
+
+Lorem ipsum \[#first-footnote-name]_ dolor sit amet \[#second-footnote-name]_
+
+.. rubric:: Footnotes
+
+.. [#first-footnote-name] Text of the first footnote.
+.. [#fsecond-footnote-name] Text of the second footnote.
+
+You can also explicitly number the footnotes (\[1]_) or use auto-numbered footnotes without names (\[#]_).
+
+This is a tip.
+
+To facilitate editing, auto-numbered footnotes should not be used. Instead, use short descriptive names (that simplify cross-referencing).
+
+
+Citations
+---------
+
+Standard reST citations are supported:
+
+Lorem ipsum [Ref]_ dolor sit amet.
+
+.. [Ref] Book or article reference, URL or whatever.
+
+Citation usage is similar to footnote usage, but with a label that is not numeric or begins with #.
+
+When the documentation is built using the Sphinx document generator, the citations are ?global?, meaning that every citation can be referenced from any .rst files. In this case, a separate file may be created (e.g. a references.rst file).
+
+Substitutions
+-------------
+
+.. code ::
+
+    The |biohazard| symbol must be used on containers used to
+    dispose of medical waste.
+    
+    .. |biohazard| image:: biohazard.png
+
+It is an error for a substitution definition block to directly or indirectly contain a circular substitution reference.
+
+Substitutions do NOT work inside directives (or inside the options of a directive).
+
+Do not try to google for a solution (...been there). It is a design limitation: RST markup can not be nested. 
+
+Substitution references are replaced in-line by the processed contents of the corresponding definition (linked by matching substitution text).  Matches are case-sensitive but forgiving; if no exact match is found, a case-insensitive comparison is attempted.
+
+Substitution definitions allow the power and flexibility of block-level directives to be shared by inline text.  They are a way to include arbitrarily complex inline structures within text, while keeping the details out of the flow of text.  They are the equivalent of SGML/XML's named entities or programming language macros.
+
+Without the substitution mechanism, every time someone wants an application-specific new inline structure, they would have to petition for a syntax change.  In combination with existing directive syntax, any inline structure can be coded without new syntax (except possibly a new directive).
+
+Substitution references may be used to associate inline text with an externally defined presentation style:
+
+.. code ::
+    
+    Even |the text in Texas| is big.
+    
+    .. |the text in Texas| style:: big
+
+The substitution mechanism may be used for simple macro substitution.  This may be appropriate when the replacement text is repeated many times throughout one or more documents, especially if it may need to change later.  A short example is unavoidably contrived:
+
+.. code ::
+    
+    |RST|_ is a little annoying to type over and over, especially
+    when writing about |RST| itself, and spelling out the
+    bicapitalized word |RST| every time isn't really necessary for
+    |RST| source readability.
+    
+    .. |RST| replace:: reStructuredText
+    .. _RST: http://docutils.sourceforge.net/rst.html
+
+Note the trailing underscore in the first use of a substitution reference.  This indicates a reference to the corresponding hyperlink target.
+
+The "replace" directive is used to indicate replacement text for a substitution reference. It may be used within substitution definitions only. For example, this directive can be used to expand abbreviations:
+
+.. |reST| replace:: reStructuredText
+
+Yes, |reST| is a long word, so I can't blame anyone for wanting to
+abbreviate it.
+
+As reStructuredText doesn't support nested inline markup, the only way to create a reference with styled text is to use substitutions with the "replace" directive:
+
+I recommend you try |Python|_.
+
+.. |Python| replace:: Python, *the* best language around
+.. _Python: http://www.python.org/
+
+
+reST supports ?substitutions?, which are pieces of text and/or markup referred to in the text by |name|. They are defined like footnotes with explicit markup blocks, like this:
+
+.. |name| replace:: replacement *text*
+
+or this:
+
+.. |caution| image:: warning.png
+             :alt: Warning!
+
+If you want to use some substitutions for all documents, put them into a separate file (e.g. substitutions.txt) and include it into all documents you want to use them in, using the include directive.
+
+Be sure to use a file name extension which different from that of other source files, to avoid Sphinx finding it as a standalone document. For example, use the .rst file extension for the source files, and the .txt file extension for the files which are to be included.
+
+Glossaries and definition lists
+--------------------------------
 
 Definition lists
 
@@ -215,344 +789,212 @@ To automatically sort a glossary, include the following flag::
  .. glossary::
    :sorted:
 
-Field lists
+Admonitions
+-----------
 
-Field lists are two-column table-like structures resembling database records (label & data pairs). For example:
+Admonitions are specially marked "topics" that can appear anywhere an ordinary body element can. They contain arbitrary body elements. Typically, an admonition is rendered as an offset block in a document, sometimes outlined or shaded, with a title matching the admonition type. For example:
 
-:Date: 2001-08-16
-:Version: 1
-:Authors: - Me
-          - Myself
-          - I
-:Indentation: Since the field marker may be quite long, the second
-   and subsequent lines of the field body do not have to line up
-   with the first line, but they must be indented relative to the
-   field name marker, and they must line up with each other.
-:Parameter i: integer
+.. DANGER::
+   Beware killer rabbits!
 
-Tables
+This directive might be rendered something like this:
 
-The reStructuredText markup supports two basic types of tables. For grid tables, you have to ?paint? the cell grid yourself. They look like this:
++------------------------+
+|        !DANGER!        |
+|                        |
+| Beware killer rabbits! |
++------------------------+
 
-+------------------------+------------+----------+----------+
-| Header row, column 1   | Header 2   | Header 3 | Header 4 |
-| (header rows optional) |            |          |          |
-+========================+============+==========+==========+
-| body row 1, column 1   | column 2   | column 3 | column 4 |
-+------------------------+------------+----------+----------+
-| body row 2             | ...        | ...      |          |
-+------------------------+------------+----------+----------+
+The following admonition directives have been implemented:
 
-Simple tables are easier to write, but limited: they must contain more than one row, and the first column cannot contain multiple lines. They look like this:
+    attention
+    caution
+    danger
+    error
+    hint
+    important
+    note
+    tip
+    warning
 
-=====  =====  =======
-A      B      A and B
-=====  =====  =======
-False  False  False
-True   False  False
-False  True   False
-True   True   True
-=====  =====  =======
+Any text immediately following the directive indicator (on the same line and/or indented on following lines) is interpreted as a directive block and is parsed for normal body elements. For example, the following "note" admonition directive contains one paragraph and a bullet list consisting of two list items:
 
-This is a tip.
+.. note:: This is a note admonition.
+   This is the second line of the first paragraph.
 
-These are the basic types of tables, which are rather clumsy. Also available (and easier to use) are special tables, namely list-tables and CSV-tables.
+   - The note contains all indented body elements
+     following.
+   - It includes this bullet list.
 
-An \exceltable_ extension can also be used with Sphinx, which allows the inclusion of XLS spreadsheets, or part of them, into a reST document.
-Hyperlinks
-External links
 
-Use `link text <http://example.com/>`_ for inline web links. If the link text should be the web address, you don?t need special markup at all, the parser finds links and mail addresses in ordinary text (with no markup).
+This is a generic, titled admonition. The title may be anything the author desires.
 
-You can also separate the link and the target definition, like this:
+The author-supplied title is also used as a "classes" attribute value after being converted into a valid identifier form (down-cased; non-alphanumeric characters converted to single hyphens; "admonition-" prefixed). For example, this admonition:
 
-This is a paragraph that contains `a link`_.
+.. admonition:: And, by the way...
 
-.. _a link: http://example.com/
+   You can make up your own admonition too.
 
-This is a tip.
+becomes the following document tree (pseudo-XML):
 
-The use of inline web links is discouraged, to improve the readability of the reST text.
-
-Simple links (e.g. to institutional sites, software sites, and so on) should be kept together at the end of the text file (this is merely a way to simplify the editing procedure, and the update and verification of the links).
-Internal links
-
-To support cross-referencing to arbitrary locations in any document, the standard reST labels are used. For this to work, the label names must be unique throughout the entire documentation. There are two ways in which you can refer to labels:
-
-    If you place a label directly before a section title, you can reference to it with \:ref:`label-name`. Example:
-
-     \.. _my-label-ref:
-     Section to cross-reference
-     \--------------------------
-
-     This is the text of the section.
-
-     In the end of this phrase is a reference to the section title, see \:ref:`my-label-ref`.
-
-     The :ref: role would then generate a link to the section, with the link title being ?Section to cross-reference?. This works just as well when section and reference are in different source files.
-
-    Automatic labels also work with figures:
-
-    .. _my-figure-ref:
-
-    .. figure:: my-image.png
-
-       My figure caption
-
-    A reference like \:ref:`my-figure-ref` would insert a reference to the figure with link text ?My figure caption?.
-
-    The same works for tables that are given an explicit caption using the table directive.
-
-    Labels that aren?t placed before a section title can still be referenced to, but you must provide the text for the link, using this syntax: \:ref:`Link text <label-name>`.
-
-Using :ref: is advised over standard reStructuredText links to sections (like \`Section title`_) because it works across files, when section headings are changed, and for all builders that support cross-references.
-Source Code
-
-Literal code blocks are introduced by ending a paragraph with the special marker ::. The literal block must be indented (and, like all paragraphs, separated from the surrounding ones by blank lines):
-
-This is a normal text paragraph. The next paragraph is a code sample::
-
-   It is not processed in any way, except
-   that the indentation is removed.
-
-   It can span multiple lines.
-
-This is a normal text paragraph again.
-
-The handling of the :: marker is smart:
-
-    If it occurs as a paragraph of its own, that paragraph is completely left out of the document.
-    If it is preceded by whitespace, the marker is removed.
-    If it is preceded by non-whitespace, the marker is replaced by a single colon.
-
-That way, the second sentence in the above example?s first paragraph would be rendered as ?The next paragraph is a code sample:?.
-Explicit Markup
-
-Explicit markup is used in reStructuredText for most constructs that need special handling, such as footnotes, specially-highlighted paragraphs, comments, and generic directives.
-
-An explicit markup block begins with a line starting with .. followed by whitespace and is terminated by the next paragraph at the same level of indentation. (There needs to be a blank line between explicit markup and normal paragraphs. This may all sound a bit complicated, but it is intuitive enough when you write it.)
-Directives
-
-A directive is a generic block of explicit markup.
-
-The directive content follows after a blank line and is indented relative to the directive start.
-
-Basically, a directive consists of a name, arguments, options and content.
-
-Look at this example:
-
-.. contents:: This is my Table of Contents
-   :depth: 2
-
-The directive starts with .. followed by one whitespace. The name of the directive is contents (it creates a table of contents). This directive takes one argument: the table of contents? title (?This is my Table of Contents?). The option depth specifies the number of section levels that are collected in the table of contents.
-
-Options are given in the lines immediately following the arguments and are indicated by the colons. Options must be indented to the same level as the directive content.
-
-Docutils supports the following directives:
-
-    Admonitions: attention, caution, danger, error, hint, important, note, tip, warning and the generic admonition. (Most themes style only note and warning specially.)
-    
-    Images:
-        image - see the images section;
-        figure - an image with caption and optional legend.
-    Additional body elements:
-        contents <table-of-contents> - a local table of contents for the sections in the current file only;
-        rubric - a heading without relation to the document?s sections that won?t be included in any table of contents;
-        topic and sidebar - special highlighted body elements;
-        epigraph - a block quote with optional attribution line;
-        container - a container with a custom class, useful to generate an outer ``<div>`` in HTML output.
-    Special tables:
-        table - a table with title;
-        csv-table - a table generated from comma-separated values;
-        list-table - a table generated from a list of lists.
-    Special directives:
-        include - include reStructuredText from another file;
-        raw - include raw target-format markup, such as LaTeX;
-        class - assign a class attribute to the next element.
+<document source="test data">
+    <admonition classes="admonition-and-by-the-way">
+        <title>
+            And, by the way...
+        <paragraph>
+            You can make up your own admonition too.
 
 Table of contents
+-----------------
 
-To include a table of contents within a given document, use the directive contents. The following example creates a local table of contents with a maximum of two levels (below the level where it is located):
+The "contents" directive generates a table of contents (TOC) in a topic. Topics, and therefore tables of contents, may occur anywhere a section or transition may occur. Body elements and topics may not contain tables of contents.
 
-Part II
-#######
+Here's the directive in its simplest form:
 
-Chapter 1
-*********
+::
 
-.. contents::
-   :depth: 2
-   :local:
+..   contents::
 
-Heading 1
-=========
+Language-dependent boilerplate text will be used for the title. The English default title text is "Contents".
 
-The toctree directive creates a table of contents that collets information from several files. The following example creates a table of contents from the sections of various documents (up to a depth of 3 levels). The :glob: option allows all documents in the ?chapter2? folder to be included (sorted according to their name)::
+An explicit title may be specified::
 
- .. toctree::
-   :glob:
-   :maxdepth: 3
+    .. contents:: Table of Contents
 
-   preamble
-   chapter1/part1
-   chapter1/conclusion
-   chapter2/*
-   references
+The title may span lines, although it is not recommended::
 
-Note
+    .. contents:: Here's a very long Table of
+       Contents title
 
-When building HTML pages from the default template, a <div class="sphinxsidebar"> is created that holds a ?table of contents? with links to the document sections. The number of levels in the sidebar can be controlled. For example, placing :tocdepth: 3 in the beggining of the document restricts the number of levels to 3.
-Images
+Options may be specified for the directive, using a field list::
 
-reST supports an image directive, used like so:
+    .. contents:: Table of Contents
+       :depth: 2
 
-.. image:: gnu.png
-   (options)
+If the default title is to be used, the options field list may begin on the same line as the directive marker::
 
-The file name given (here gnu.png) must either be relative to the source file, or absolute (which means that they are relative to the top source directory).
+    .. contents:: :depth: 2
 
-For example, the file sketch/spam.rst could refer to the image images/spam.png as ../images/spam.png or as /images/spam.png.
+The following options are recognized:
 
-The image size options (width and height) should be specified in points (pt), as that will best support output to different formats (HTML, LaTeX).
-Figures
+depth : integer
+    The number of section levels that are collected in the table of contents. The default is unlimited depth.
+local : flag (empty)
+    Generate a local table of contents. Entries will only include subsections of the section in which the directive is given. If no explicit title is given, the table of contents will not be titled.
+backlinks : "entry" or "top" or "none"
+    Generate links from section headers back to the table of contents entries, the table of contents itself, or generate no backlinks.
+class : text
+    Set a "classes" attribute value on the topic element. See the class directive below. 
 
-A figure consists of image data (including image options), an optional caption (a single paragraph), and an optional legend (arbitrary body elements):
+Including snippets
+-------------------------
 
-.. figure:: picture.png
-   :scale: 50 %
-   :alt: map to buried treasure
+The "include" directive reads a text file. The directive argument is the path to the file to be included, relative to the document containing the directive. Unless the options literal or code are given, the file is parsed in the current document's context at the point of the directive. For example:
 
-   This is the caption of the figure (a simple paragraph).
+This first example will be parsed at the document level, and can
+thus contain any construct, including section headers.
 
-   The legend consists of all elements after the caption.  In this
-   case, the legend consists of this paragraph and the following
-   table:
+.. 
 
-   +-----------------------+-----------------------+
-   | Symbol                | Meaning               |
-   +=======================+=======================+
-   | .. image:: tent.png   | Campground            |
-   +-----------------------+-----------------------+
-   | .. image:: waves.png  | Lake                  |
-   +-----------------------+-----------------------+
-   | .. image:: peak.png   | Mountain              |
-   +-----------------------+-----------------------+
+    .. include:: inclusion.txt
+    
+    Back in the main document.
+    
+        This second example will be parsed in a block quote context.
+        Therefore it may only contain body elements.  It may not
+        contain section headers.
+    
+        .. include:: inclusion.txt
 
-There must be blank lines before the caption paragraph and before the legend. To specify a legend without a caption, use an empty comment (..) in place of the caption.
-Special tables
+If an included document fragment contains section structure, the title adornments must match those of the master document.
 
-The table directive associates a title with the following table:
+Standard data files intended for inclusion in reStructuredText documents are distributed with the Docutils source code, located in the "docutils" package in the docutils/parsers/rst/include directory. To access these files, use the special syntax for standard "include" data files, angle brackets around the file name:
 
-.. table:: User list
+.. 
 
-   ==========  =========
-   First name  Last name
-   ==========  =========
-   John        Doe
-   Jane        Dove
-   ==========  =========
+    .. include:: <isonum.txt>
 
-A list-table is created from a uniform two-level bullet list:
+The current set of standard "include" data files consists of sets of substitution definitions. See reStructuredText Standard Definition Files for details.
 
-.. list-table:: User list
-   :header-rows:1
+The following options are recognized:
 
-   *  - First name
-      - Last name
-   *  - John
-      - Doe
-   *  - Jane
-      - Dove
+start-line : integer
+    Only the content starting from this line will be included. (As usual in Python, the first line has index 0 and negative values count from the end.)
+end-line : integer
+    Only the content up to (but excluding) this line will be included.
+start-after : text to find in the external data file
+    Only the content after the first occurrence of the specified text will be included.
+end-before : text to find in the external data file
+    Only the content before the first occurrence of the specified text (but after any after text) will be included.
+literal : flag (empty)
+    The entire included text is inserted into the document as a single literal block.
+code : formal language (optional)
+    The argument and the content of the included file are passed to the code directive (useful for program listings). (New in Docutils 0.9)
+number-lines : [start line number]
+    Precede every code line with a line number. The optional argument is the number of the first line (defaut 1). Works only with code or literal. (New in Docutils 0.9)
+encoding : name of text encoding
+    The text encoding of the external data file. Defaults to the document's input_encoding.
+tab-width : integer
+    Number of spaces for hard tab expansion. A negative value prevents expansion of hard tabs. Defaults to the tab_width configuration setting.
 
-A csv-table is created from comma-separated values (either in the document or in an external file):
+With code or literal the common options :class: and :name: are recognized as well.
 
-.. csv-table:: User list
-   :header:"First name","Last name"
+Combining start/end-line and start-after/end-before is possible. The text markers will be searched in the specified lines (further limiting the included content).
 
-   "John","Doe"
-   "Jane","Dove"
+Sidebar
+-------
 
-Another example of csv-table, using and external file::
+Sidebars are like miniature, parallel documents that occur inside other documents, providing related or reference material. A sidebar is typically offset by a border and "floats" to the side of the page; the document's main text may flow around it. Sidebars can also be likened to super-footnotes; their content is outside of the flow of the document's main text.
 
-  .. csv-table:: Table 1 - Legend of the table goes here...
-     :header-rows: 1
-     :stub-columns: 1
-     :file: ../tables/table1.csv
+Sidebars may occur anywhere a section or transition may occur. Body elements (including sidebars) may not contain nested sidebars.
 
-An exceltable can also be used::
+The directive's sole argument is interpreted as the sidebar title, which may be followed by a subtitle option (see below); the next line must be blank. All subsequent lines make up the sidebar body, interpreted as body elements. For example:
 
- .. exceltable:: Table 1 - Legend of the table goes here...
-    :file: ../tables/tables.xls
-    :sheet: table1
-    :selection: A1:C20
-    :header: 1
+::
 
-Using Excel tables requires an additional module sphinxcontrib.exceltable that is an extension for Sphinx, that adds support for including spreadsheets, or part of them, into Sphinx document. It can be installed using pip:
+    .. sidebar:: Optional Sidebar Title
+       :subtitle: Optional Sidebar Subtitle
+    
+       Subsequent indented lines comprise
+       the body of the sidebar, and are
+       interpreted as body elements.
 
-pip install sphinxcontrib-exceltable
+The following options are recognized:
 
-Then the project conf.py file needs to be updated:
+subtitle : text
+    The sidebar's subtitle. 
 
-# Add ``sphinxcontrib.exceltable`` into extension list
-extensions = ['sphinxcontrib.exceltable']
+Code
+-----
 
-Another alternative is xmltable (https://pythonhosted.org/rusty/xmltable.html).
-Footnotes
+The "code" directive constructs a literal block. If the code language is specified, the content is parsed by the Pygments syntax highlighter and tokens are stored in nested inline elements with class arguments according to their syntactic category. The actual highlighting requires a style-sheet (e.g. one generated by Pygments, see the sandbox/stylesheets for examples).
 
-For footnotes, use \[#name]_ to mark the footnote location, and add the footnote body at the bottom of the document after a ?Footnotes? rubric heading, like so:
+The parsing can be turned off with the syntax_highlight configuration setting and command line option or by specifying the language as :class: option instead of directive argument. This also avoids warnings when Pygments is not installed or the language is not in the supported languages and markup formats.
 
-Lorem ipsum \[#first-footnote-name]_ dolor sit amet \[#second-footnote-name]_
+For inline code, use the "code" role.
 
-.. rubric:: Footnotes
+The following options are recognized:
 
-.. [#first-footnote-name] Text of the first footnote.
-.. [#fsecond-footnote-name] Text of the second footnote.
+number-lines : [start line number]
+    Precede every line with a line number. The optional argument is the number of the first line (defaut 1).
 
-You can also explicitly number the footnotes (\[1]_) or use auto-numbered footnotes without names (\[#]_).
+and the common options :class: and :name:.
 
-This is a tip.
+Example::
 
-To facilitate editing, auto-numbered footnotes should not be used. Instead, use short descriptive names (that simplify cross-referencing).
-Citations
+    The content of the following directive
 
-Standard reST citations are supported:
+    .. code:: python
 
-Lorem ipsum [Ref]_ dolor sit amet.
+      def my_function():
+          "just a test"
+          print 8/2
 
-.. [Ref] Book or article reference, URL or whatever.
+    is parsed and marked up as Python source code.
 
-Citation usage is similar to footnote usage, but with a label that is not numeric or begins with #.
 
-When the documentation is built using the Sphinx document generator, the citations are ?global?, meaning that every citation can be referenced from any .rst files. In this case, a separate file may be created (e.g. a references.rst file).
-
-This is a tip.
-
-See Managing bibliographic citations in Sphinx for further information.
-Substitutions
-
-reST supports ?substitutions?, which are pieces of text and/or markup referred to in the text by |name|. They are defined like footnotes with explicit markup blocks, like this:
-
-.. |name| replace:: replacement *text*
-
-or this:
-
-.. |caution| image:: warning.png
-             :alt: Warning!
-
-If you want to use some substitutions for all documents, put them into a separate file (e.g. substitutions.txt) and include it into all documents you want to use them in, using the include directive.
-
-Be sure to use a file name extension which different from that of other source files, to avoid Sphinx finding it as a standalone document. For example, use the .rst file extension for the source files, and the .txt file extension for the files which are to be included.
-
-This is a tip.
-
-This is useful in technical documentation such as User?s Manuals, where a substitution file can be built for each localised version of the interface elements (menus, messages, etc), guaranteeing the consistency of the document translation with the software?s human user interface.
-
-Warning.
-
-Substitutions do NOT work inside directives (or inside the options of a directive).
-
-Do not try to google for a solution (...been there). It is a design limitation: RST markup can not be nested. Period.
 Comments
+--------
 
 Every explicit markup block which isn?t a valid markup construct is regarded as a comment. For example:
 
@@ -560,16 +1002,14 @@ Every explicit markup block which isn?t a valid markup construct is regarded as 
 
 You can indent text after a comment start to form multiline comments:
 
-..
-   This whole indented block
-   is a comment.
+.. code ::
 
-   Still in the comment.
+    ..
+       This whole indented block
+       is a comment.
+    
+       Still in the comment.
 
 This is a style convention.
 
 Comments can also be used as placeholders to mark places within the document. For example:
-
-    the .. links-placeholder can mark the place where hyperlinks are kept together at the end of the document;
-    the .. metadata-placeholder can mark the place where document metadata (author, date, etc) is kept together at the beginning of the document.
-
