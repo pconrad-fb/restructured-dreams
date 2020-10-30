@@ -176,7 +176,60 @@ Make targets
       doctest     to run all doctests embedded in the documentation (if enabled)
       coverage    to run coverage check of the documentation (if enabled)
 
+If you want to link to other files, use ref
+there's the general :ref: directive, documented here. They give this example:
 
+    .. _my-reference-label:
+
+    Section to cross-reference
+    --------------------------
+
+    This is the text of the section.
+
+    It refers to the section itself, see :ref:`my-reference-label`.
+
+Although the general hyperlinking mechanism offered by RST does work in Sphinx, the documentation recommends against using it when using Sphinx:
+
+    Using ref is advised over standard reStructuredText links to sections (like Section title_) because it works across files, when section headings are changed, and for all builders that support cross-references.
+
+
+The Sphinx documentation generator provides a more flexible alternative to definition lists (see Glossaries).
+Glossaries
+
+The Sphinx ..glossary:: directive contains a reST definition-list-like markup with terms and definitions.
+
+See the following example::
+
+ .. glossary::
+
+   environment
+      A structure where information about all documents under the root is
+      saved, and used for cross-referencing.  The environment is pickled
+      after the parsing stage, so that successive runs only need to read
+      and parse new and changed documents.
+
+   source directory
+      The directory which, including its subdirectories, contains all
+      source files for one Sphinx project.
+
+The definitions will then be used in cross-references with the :term: role. For example:
+
+The \:term:`source directory` for this project is ...
+
+In contrast to regular definition lists, a glossary supports multiple terms per entry and inline markup is allowed in terms. You can link to all of the terms. For example::
+
+ .. glossary::
+
+   term 1
+   term 2
+      Definition of both terms.
+
+When the glossary is sorted, the first term determines the sort order.
+
+To automatically sort a glossary, include the following flag::
+
+ .. glossary::
+   :sorted:
 
 A build
 -------
