@@ -143,7 +143,7 @@ time, it also means that when you switch branches all your files
 magically change to match whatever changes you’ve made in that branch.
 
 For example, I created a branch called ``test-branch`` based on the
-``master`` branch. Working in ``test-branch``, I added a file called
+``main`` branch. Working in ``test-branch``, I added a file called
 ``new-file.md`` which you can see in the directory:
 
 ::
@@ -151,13 +151,13 @@ For example, I created a branch called ``test-branch`` based on the
    $ ls
    getting-started  img  index.md new-file.md
 
-When I switch to ``master``, it’s not there:
+When I switch to ``main``, it’s not there:
 
 ::
 
-   $ git checkout master 
-   Switched to branch 'master'
-   Your branch is up to date with 'origin/master'.
+   $ git checkout main 
+   Switched to branch 'main'
+   Your branch is up to date with 'origin/main'.
    $ ls
    getting-started  img  index.md
 
