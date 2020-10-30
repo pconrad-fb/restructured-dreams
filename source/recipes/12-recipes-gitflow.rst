@@ -99,7 +99,7 @@ collaborators. –8<– “github-flow-snippet.html”
 !!! hint After you’re done with that part of the project, you can delete
 your working branch or keep it around for further work. Before starting
 work on a different part of the project, remember to switch to
-``master`` and pull again.
+``main`` and pull again.
 
 If you need to `Publish content <../../tools/tools-publishing/>`__, you
 can use one of these recipes:
