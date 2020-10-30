@@ -1,12 +1,15 @@
-reStructuredText
-================
+reStructuredText Syntax
+=======================
 
 We have
 
-* Basics - inline markup, headings, tables
+* Basics - inline markup, headings
 * Interpreted text
-* Explicit markup
-* Directives
+* Explicit markup and directives
+* Links
+* Tables
+* Images
+* Other useful directives
 
 And then we'll talk about some o fthe things that use some of these things together, like admonitions.
 
