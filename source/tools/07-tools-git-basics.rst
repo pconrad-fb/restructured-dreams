@@ -23,7 +23,7 @@ Centralized workflow
 ~~~~~~~~~~~~~~~~~~~~
 
 In the centralized workflow, everyone works on a single branch (usually
-called ``master``). Changes are committed to the local repository on
+called ``main``). Changes are committed to the local repository on
 each contributor’s own computer. From time to time, each user pushes
 changes to a remote Git repository.
 
