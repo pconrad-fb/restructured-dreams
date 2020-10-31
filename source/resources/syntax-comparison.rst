@@ -22,6 +22,7 @@ All three are supported in Git repositories.
 |                    | * Idiosyncratic link syntax  | * Lacks admonitions and other features     | * Directives and roles are clunky                         |
 |                    |                              |                                            | * Very easy to create syntax errors                       |
 |                    |                              |                                            | * Few tools available                                     |
+|                    |                              |                                            | * Some features rely on Sphinx                            |
 +--------------------+------------------------------+--------------------------------------------+-----------------------------------------------------------+
 
 Here's a quick comparison of the syntax. This is just to show what they look like, not exhaustive, just to give you a feeling. For example, in all 3 languages there are more ways to do links and headings than we're showing.
