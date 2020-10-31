@@ -9,7 +9,7 @@ managers, and engineers to collaborate on non-production content such as
 specifications, planning documents, newsletters, internal documentation,
 and the like.
 
-.. figure:: ../img/git-centralized-workflow.png
+.. figure:: ../../img/git-centralized-workflow.png
    :alt: Diagram of centralized Git workflow
 
 In this workflow, everyone works on the same branch. This makes things

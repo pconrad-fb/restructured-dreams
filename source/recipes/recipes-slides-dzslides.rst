@@ -104,7 +104,7 @@ Here’s some sample Markdown:
 
 Normal text is big enough for a title or announcement on a slide.
 
-.. figure:: ../img/slides-dzslides.png
+.. figure:: ../../img/slides-dzslides.png
    :alt: Screenshot of a DZSlides slide
 
    Screenshot of a DZSlides slide
@@ -147,7 +147,9 @@ Pandoc provides syntax for scaling an image:
 
    ![An image](bench.jpg){width=25%}
 
-.. figure:: ../img/slides-dzslides-images.png
+
+
+.. figure:: ../../img/slides-dzslides-images.png
    :alt: Screenshot of another DZSlides slide
 
    Screenshot of another DZSlides slide

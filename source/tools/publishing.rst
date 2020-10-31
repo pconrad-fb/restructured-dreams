@@ -4,6 +4,7 @@ Publishing tools
 https://people.mbi.ucla.edu/leec/docs/gitpublish/intro.html
 
 Sphinx
+------
 https://www.sphinx-doc.org/en/master/
 
  Sphinx is a tool that makes it easy to create intelligent and beautiful documentation, written by Georg Brandl and licensed under the BSD license.
@@ -31,7 +32,9 @@ easy_install -U Sphinx
 Elevated privileges (i.e. administration rights) should not be required.
 
 The Sphinx builder can produce a number of output formats (e.g. HTML, PDF). PDF files can be produced using the LaTeX builder (more complicated) or using the a direct PDF builder called rst2pdf (see below).
+
 Rst2Pdf
+-------
 
 rst2pdf is a tool for transforming reStructuredText to PDF using ReportLab. To install rst2pdf on Windows you also need Python because rst2pdf is coded in python.
 
@@ -55,8 +58,16 @@ How to install rst2pdf on Windows?
     User Manual: http://ralsina.me/static/manual.pdf
 
 Pandoc
-Integrated solutions
-ReST Editor for Eclipse
+------
+
+Pandoc is a tool that can convert between Markdown and a number of formats. You can use Pandoc to create Word and Powerpoint documents, PDFs, HTML, and several kinds of presentations. For longer documents, can concatenate Markdown files together.
+
+Pandoc includes formatting tricks that let you do things like create columns or scale images, and you can use stylesheets from existing documents to give your content a specific look and feel.
+
+You can also convert from various formats to Markdown, including doing things like grabbing a web page as a Markdown file. You can even try it online.
+
+ReST editor for Eclipse
+-----------------------
 
 The ReST editor for Eclipse is a plug-in for the Eclipse IDE. If Sphinx is installed, it can also be used to create (and build) Sphinx projects from within Eclipse. The following presentation documents the use of the editor.
 

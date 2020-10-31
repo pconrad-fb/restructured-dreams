@@ -193,7 +193,7 @@ The ``-D`` option tells Hugo to include draft pages in the preview. If
 you omit this option, any page with ``draft:true`` in the frontmatter is
 ignored.
 
-.. figure:: ../img/hugo-preview.png
+.. figure:: ../../img/hugo-preview.png
    :alt: Screenshot of Hugo live preview
 
    Screenshot of Hugo live preview
@@ -211,8 +211,9 @@ Images in Hugo normally go in the ``static`` directory. Here, I’ve added
 a subdirectory called ``images`` and when I add the image in my reStructuredText
 editor it looks like this:
 
-.. figure:: ../../static/images/whatever.png
-   :alt: An image
+:: 
+    .. figure:: ../../static/images/whatever.png
+       :alt: An image
 
    An image
 

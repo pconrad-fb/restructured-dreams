@@ -11,7 +11,7 @@ Flow <https://scottchacon.com/2011/08/31/github-flow.html>`__. It’s
 simple but effective. The **Pull-Work-Commit-Push** steps happen within
 a working branch.
 
-.. figure:: ../img/github-flow.png
+.. figure:: ../../img/github-flow.png
    :alt: Diagram of GitHub flow
 
    Diagram of GitHub flow

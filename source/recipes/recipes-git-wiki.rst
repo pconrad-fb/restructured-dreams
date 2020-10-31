@@ -194,9 +194,9 @@ Try the following recipe, which is very similar:
 -  `Collaborate using the Git centralized
    workflow <../recipes-centralized-workflow/>`__
 
-.. |Wiki dialog| image:: ../img/recipes-git-wiki-create.png
-.. |Settings button| image:: ../img/github-settings.png
-.. |Features section of settings| image:: ../img/git-wikis.png
-.. |Clone in Sourcetree button| image:: ../img/recipes-git-repo-bb-clone-wiki.png
-.. |Wiki button| image:: ../img/github-wiki-button.png
-.. |Screenshot of hte wiki page| image:: ../img/recipes-git-wiki-bb-something.png
+.. |Wiki dialog| image:: ../../img/recipes-git-wiki-create.png
+.. |Settings button| image:: ../../img/github-settings.png
+.. |Features section of settings| image:: ../../img/git-wikis.png
+.. |Clone in Sourcetree button| image:: ../../img/recipes-git-repo-bb-clone-wiki.png
+.. |Wiki button| image:: ../../img/github-wiki-button.png
+.. |Screenshot of hte wiki page| image:: ../../img/recipes-git-wiki-bb-something.png

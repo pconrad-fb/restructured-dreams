@@ -23,11 +23,11 @@ Centralized workflow
 ~~~~~~~~~~~~~~~~~~~~
 
 In the centralized workflow, everyone works on a single branch (usually
-called ``master``). Changes are committed to the local repository on
+called ``main``). Changes are committed to the local repository on
 each contributor’s own computer. From time to time, each user pushes
 changes to a remote Git repository.
 
-.. figure:: ../img/git-centralized-workflow.png
+.. figure:: ../../img/git-centralized-workflow.png
    :alt: Diagram of the Git centralized workflow
 
    Diagram of the Git centralized workflow
@@ -58,7 +58,7 @@ In the GitHub flow, you start a new branch based on ``master`` whenever
 you start a group of related tasks. How you organize those tasks, and
 how you decide which ones belong in a branch together, is up to you.
 
-.. figure:: ../img/github-flow.png
+.. figure:: ../../img/github-flow.png
    :alt: Diagram of the GitHub flow
 
    Diagram of the GitHub flow

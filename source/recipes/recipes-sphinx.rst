@@ -1,6 +1,14 @@
 Build docs with Sphinx
 ======================
 
+https://thomas-cokelaer.info/tutorials/sphinx/quickstart.html
+
+Sphinx focuses on documentation, in particular handwritten documentation, however, Sphinx can also be used to generate blogs, homepages and even books. 
+
+The root directory of a Sphinx collection of plain-text document sources is called the source directory. This directory also contains the Sphinx configuration file conf.py, where you can configure all aspects of how Sphinx reads your sources and builds your documentation. 1
+
+Sphinx comes with a script called sphinx-quickstart that sets up a source directory and creates a default conf.py with the most useful configuration values from a few questions it asks you. 
+
 Every page needs a title! And must be in a toctree, all or nothing
 
 toctree is a reStructuredText directive, a very versatile piece of markup. Directives can have arguments, options and content.
@@ -21,6 +29,15 @@ Having domains means that there are no naming problems when one set of documenta
 
 While Docutils provides a number of directives, Sphinx provides many more and uses directives as one of the primary extension mechanisms.
 
+Adding index terms to a paragraph in Sphinx looks like:
+
+::
+
+    .. index::
+        single: Programming languages
+        single: Compiling
+        single: Source code
+
 Since reST does not have facilities to interconnect several documents, or split documents into multiple output files, Sphinx uses a custom directive to add relations between the single files the documentation is made of, as well as tables of contents. The toctree directive is the central element.
 
 * The goal of this document is to give you a quick taste of what Sphinx is and how you might use it. When you?re done here, you can check out the installation guide followed by the intro to the default markup format used by Sphinx, reStucturedText.
@@ -38,11 +55,6 @@ https://www.sphinx-doc.org/en/master/usage/quickstart.html#setting-up-the-docume
 Let?s assume you?ve run sphinx-quickstart. It created a source directory with conf.py and a master document, index.rst. The main function of the master document is to serve as a welcome page, and to contain the root of the ?table of contents tree? (or toctree). This is one of the main things that Sphinx adds to reStructuredText, a way to connect multiple files to a single hierarchy of documents.
 
 The next thing you should do is set up the folders yo uwant with some index files in them and start figuring out the structure of the content. Then you want to deal with the TOC.
-
-
-
-
-
 
 Dealing with the TOC
 --------------------
@@ -179,6 +191,8 @@ Make targets
 If you want to link to other files, use ref
 there's the general :ref: directive, documented here. They give this example:
 
+::
+
     .. _my-reference-label:
 
     Section to cross-reference
@@ -190,7 +204,7 @@ there's the general :ref: directive, documented here. They give this example:
 
 Although the general hyperlinking mechanism offered by RST does work in Sphinx, the documentation recommends against using it when using Sphinx:
 
-    Using ref is advised over standard reStructuredText links to sections (like Section title_) because it works across files, when section headings are changed, and for all builders that support cross-references.
+    Using ref is advised over standard reStructuredText links to sections (like Section title) because it works across files, when section headings are changed, and for all builders that support cross-references.
 
 
 The Sphinx documentation generator provides a more flexible alternative to definition lists (see Glossaries).
@@ -233,6 +247,38 @@ To automatically sort a glossary, include the following flag::
 
 A build
 -------
+
+::
+
+    $ sphinx-build -b html source/ build/
+    Running Sphinx v3.2.1
+    loading pickled environment... done
+    building [mo]: targets for 0 po files that are out of date
+    building [html]: targets for 2 source files that are out of date
+    updating environment: 1 added, 4 changed, 0 removed
+    reading sources... [100%] tools/index                                                          
+    /home/pconrad/git/restructured-dreams/source/recipes/13-recipes-hugo.rst:: WARNING: image file not readable: recipes/../../static/images/whatever.png
+    /home/pconrad/git/restructured-dreams/source/resources/22-restructuredtext-cheatsheet.rst:45: WARNING: image file not readable: path/to/image.jpg
+    looking for now-outdated files... none found
+    pickling environment... done
+    checking consistency... /home/pconrad/git/restructured-dreams/source/01-index.rst: WARNING: document isn't included in any toctree
+    /home/pconrad/git/restructured-dreams/source/rstest.rst: WARNING: document isn't included in any toctree
+    done
+    preparing documents... done
+    writing output... [100%] tools/index                                                           
+    generating indices...  genindexdone
+    writing additional pages...  searchdone
+    copying images... [100%] recipes/../../img/hugo-preview.png                                    
+    copying static files... ... done
+    copying extra files... done
+    dumping search index in English (code: en)... done
+    dumping object inventory... done
+    build succeeded, 4 warnings.
+    
+    The HTML pages are in build
+
+Another build
+-------------
 
 ::
 

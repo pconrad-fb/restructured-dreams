@@ -9,7 +9,8 @@ reStructured Dreams
 .. toctree::
    :includehidden:
 
-   02-getting-started
+   getting-started
+   rest/index
    tools/index
    recipes/index
    resources/index
