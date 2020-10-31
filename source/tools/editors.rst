@@ -8,14 +8,13 @@ Like other markup languages, reStructuredText works well with text editors and c
 
 Code editors
 ------------
-Code editors, while they are not designed specifically for reStructuredText, sometimes offer sophisticated packages to support reStructuredText editing and preview. 
+Code editors, while they are not designed specifically for reStructuredText, sometimes offer sophisticated packages to support reStructuredText editing and preview.
 
 .. image:: ../../img/atom-rst-screenshot.png
-
-An advantage of a code editor is the ability to do things like jump to a specific line number or set text wrapping rules. Some editors let you manage your project in Git directly from the user interface. The following editors, among others, are worth a look:
+An advantage of a code editor is the ability to do things like jump to a specific line number or set text wrapping rules. A disadvantage is that code editors might not have packages to help you edit tables graphically. Some editors let you manage your project in Git directly from the user interface. The following editors, among others, are worth a look:
 
 - `Atom <https://atom.io/>`_
-- `Sublime Text <https://www.sublimetext.com/>`_ 
+- `Sublime Text <https://www.sublimetext.com/>`_
 - `Visual Studio Code <https://code.visualstudio.com/>`_
 
 There are also various reStructuredText tools for `Eclipse <https://www.eclipse.org/>`_.
@@ -23,7 +22,7 @@ There are also various reStructuredText tools for `Eclipse <https://www.eclipse.
 reStructuredText editors
 ------------------------
 
-There are a few dedicated reStructuredText editors out there. Most editors offer a live preview with error messages to help you troubleshoot your reStructuredText as you write. My current favorite is ReText, which is simple but makes tables and images easy.
+There are a few dedicated reStructuredText editors out there. Most editors offer a live preview with error messages to help you troubleshoot your reStructuredText as you write. My current favorite is ReText, which is simple but makes tables and images easy. An advantage of a dedicated reStructuredText editor is that some of them include support for editing tables and other syntactical features.
 
 Formiko
 ^^^^^^^

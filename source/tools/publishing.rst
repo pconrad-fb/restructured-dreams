@@ -1,3 +1,5 @@
+.. _publishing-tools:
+
 Publishing tools
 ================
 
@@ -19,7 +21,7 @@ It was originally created for the Python documentation, and it has excellent fac
     Extensions: automatic testing of code snippets, inclusion of docstrings from Python modules (API docs), and more
     Contributed extensions: more than 50 extensions contributed by users in a second repository; most of them installable from PyPI
 
-Sphinx uses reStructuredText as its markup language, and many of its strengths come from the power and straightforwardness of reStructuredText and its parsing and translating suite, the Docutils. 
+Sphinx uses reStructuredText as its markup language, and many of its strengths come from the power and straightforwardness of reStructuredText and its parsing and translating suite, the Docutils.
 
 Sphinx is a Python documentation generator.
 
