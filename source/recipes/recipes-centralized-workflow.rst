@@ -36,6 +36,9 @@ editor <tools-editors/>`__, then make sure you have Git set
 up and try each step below. The steps work together like a heartbeat
 that keeps content safe and synchronized for all collaborators.
 
+.. Hint::
+   If you use a code editor such as Atom, you can see the changes you'll need to commit as you edit your reStructuredText files.
+
 1. `Pull <pull>`_
     Fetch the latest changes from the remote repository to the local repository on your computer
 2. Work
