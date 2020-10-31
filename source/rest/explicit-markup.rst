@@ -9,17 +9,18 @@ Syntax examples:
 +-------------------------+------------------------------------------+
 |  Block                  |  Syntax                                  |
 +=========================+==========================================+
-|  Substitution definition|  ``..|text| replacement``                |
+| Substitution definition | ``..|text| replacement ``                |
 +-------------------------+------------------------------------------+
-|  Cross-reference target |  ``.. _label:``                          |
+| Cross-reference target  |::                                        |
 |                         |                                          |
-|                         |  ``Paragraph``                           |
+|                         |  .. _label:                              |
+|                         |                                          |
+|                         |  Paragraph text                          |
++-------------------------+------------------------------------------+
+| Link target             | ``.. _label: URL   ``                    |
 |                         |                                          |
 +-------------------------+------------------------------------------+
-|  Link target            |  ``.. _label: URL``                      |
-|                         |                                          |
-+-------------------------+------------------------------------------+
-|  Footnote or citation   |  ``.. [label] Footnote or citation text``|
+| Footnote or citation    | ``\.. [label] Footnote or citation text``|
 +-------------------------+------------------------------------------+
 
 Directives
@@ -31,8 +32,9 @@ Syntax:
 
 ::
 
-   .. directive-name:: arguments     
-      :option-name: option-values      
+   .. directive-name:: arguments
+      :option-name: option-value
+      :option-name: option-value
 
       Block body
 
@@ -42,6 +44,6 @@ Standard directives include:
 * Image and figure
 * Table of contents
 * Sidebar
-* Special tables (see specialtables_)
+* Special tables
 
 There are many more standard directives, and you can create your own with a few lines of Python programming.

@@ -1,13 +1,15 @@
 Tables
 ======
 
-reStructuredText has a bunch of different ways to create tables. 
+reStructuredText includes a number of different ways to create tables.
 There are two standard syntaxes (grid tables and simple tables) and three directives.
 
 Grid tables
 --------------
 
-Grid tables are a little worky to create, but offer fairly sophisticated syntax. For example , cells can span rows or columns, and each cell contains a block which means you can do lots of things inside a cell.
+Grid tables are a little cumbersome to create, but offer fairly sophisticated
+syntax. Cells can span rows or columns. Each cell contains
+a block, which means you can do lots of things inside a cell.
 
 Example:
 
@@ -30,7 +32,7 @@ Example:
 Simple tables
 --------------
 
-Simple tables are much easier to create but offer less in the way of features. 
+Simple tables are much easier to create but offer fewer features.
 
 Example:
 
@@ -55,7 +57,8 @@ There are three directives that let you create tables in special ways:
 Table directive
 ^^^^^^^^^^^^^^^
 
-The ``table`` directive lets you give a table a title and lets you specify things like cell alignment and column widths.
+The ``table`` directive gives a table a title and lets you specify things like
+cell alignment and column widths.
 
 Example:
 
@@ -63,7 +66,7 @@ Example:
 
     .. table:: Inline markup
        :align: left
-    
+
        =============== ==========
        Markup          Effect
        =============== ==========
@@ -74,15 +77,15 @@ Example:
 CSV table directive
 ^^^^^^^^^^^^^^^^^^^
 
-The ``csv-table`` directive lets you create a table from CSV (comma-separated values) data. 
+The ``csv-table`` directive lets you create a table from CSV (comma-separated values) data.
 
 Example:
 
-.. code ::
+::
 
     .. csv-table:: Inline markup
        :header: "Markup", "Effect"
-    
+
        "``*emphasis*``", "*emphasis*"
        "``**strong**``", "**strong**"
 
@@ -97,7 +100,7 @@ Example:
 
     .. list-table:: Inline markup
        :header-rows: 1
-    
+
        * - Markup
          - Effect
        * - ``*emphasis*``

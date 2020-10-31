@@ -1,7 +1,8 @@
 Images and figures
 ------------------
 
-Images and figures are directives that display pictures. The simplest syntax looks like this:
+Images and figures are directives that display pictures. The simplest version of the
+syntax looks like this:
 
 ::
 
@@ -20,16 +21,17 @@ You can specify options about how the picture should be rendered:
        :alt: alternate text
        :align: right
 
-A figure lets you add a caption, which can be several paragraphs indented the same amount and can include tables or other markup, including images.
+A figure lets you add a caption, several paragraphs indented the same amount, which
+can include tables or other markup, including images.
 
-:: 
+::
 
     .. figure:: image.png
        :scale: 50%
        :alt: Severity of fire danger
-    
+
        This map shows the relative fire danger of different counties this year.
-    
+
        +-----------------------+---------+
        | Symbol                | Meaning |
        +=======================+=========+
