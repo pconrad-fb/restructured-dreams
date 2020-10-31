@@ -11,6 +11,9 @@ Atom, Sublime, VScode might give a better UI with the directory/file nav on the 
 
 Figure out an atom recipe
 
+- rst-preview-pandoc and language-reStructuredText packages needed
+- 
+
 
 Or there's https://github.com/audreyfeldroy/sphinx-gui 
 

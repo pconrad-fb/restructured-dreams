@@ -6,6 +6,20 @@ Editors
 
 Like other markup languages, reStructuredText works well with text editors and code editors, and a small number of purpose-built editors. Here are a few to look at.
 
+Code editors
+------------
+Code editors, while they are not designed specifically for reStructuredText, sometimes offer sophisticated packages to support reStructuredText editing and preview. 
+
+.. image:: ../../img/atom-rst-screenshot.png
+
+An advantage of a code editor is the ability to do things like jump to a specific line number or set text wrapping rules. Some editors let you manage your project in Git directly from the user interface. The following editors, among others, are worth a look:
+
+- `Atom <https://atom.io/>`_
+- `Sublime Text <https://www.sublimetext.com/>`_ 
+- `Visual Studio Code <https://code.visualstudio.com/>`_
+
+There are also various reStructuredText tools for `Eclipse <https://www.eclipse.org/>`_.
+
 reStructuredText editors
 ------------------------
 
@@ -31,15 +45,7 @@ Online editors
 * `Online Sphinx Editor <https://livesphinx.herokuapp.com/>`_
 * `reStructuredText Viewer <http://rst.aaroniles.net/>`_
 
-Code editors
-------------
-Code editors, while they are not designed specifically for reStructuredText, sometimes offer sophisticated packages to support reStructuredText editing and preview. An advantage of a code editor is the ability to do things like jump to a specific line number or set text wrapping rules. The following editors, among others, are worth a look:
 
-- `Atom <https://atom.io/>`_
-- `Sublime Text <https://www.sublimetext.com/>`_ 
-- `Visual Studio Code <https://code.visualstudio.com/>`_
-
-There are also various reStructuredText tools for `Eclipse <https://www.eclipse.org/>`_.
 
 Text editors
 ------------
