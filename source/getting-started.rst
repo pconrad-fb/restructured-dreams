@@ -51,11 +51,11 @@ Getting started
 You can install everything up front, or just install what you need as
 you go along. If you’re not sure, start with the following steps:
 
-1. Install **Pandoc**.
+#. Install **Pandoc**.
 #. Install **Python**.
-2. Choose and install a **reStructuredText editor** or a **code editor**.
-3. Set up **Git**.
-4. Install **Sphinx**.
+#. Choose and install a **reStructuredText editor** or a **code editor**.
+#. Set up **Git**.
+#. Install **Sphinx**.
 
 Once you’ve got these tools installed, you can start trying the recipes.
 
@@ -65,14 +65,16 @@ Things to know
 You’ll find it easiest to follow the recipes in this guide if you are
 comfortable with the following topics.
 
-| **The command line**
-| Some of the recipes in this guide involve at least some typing on the command
+**The command line**
+
+Some of the recipes in this guide involve at least some typing on the command
 line. You'll definitely need to use the command line a little bit when you're
 working with Pandoc or Sphinx, for example.
 
-| **Working with a package manager**
-| Some tools require installation using one of the following common
-  package managers:
+**Working with a package manager**
+
+Some tools require installation using one of the following common
+package managers:
 
 -  Linux: `apt-get <https://help.ubuntu.com/community/AptGet/Howto>`__
    or `yum <http://yum.baseurl.org/>`__
@@ -81,20 +83,22 @@ working with Pandoc or Sphinx, for example.
 
 A package manager can make it easy to install several packages at once.
 
-| **Installing Python apps with Pip**
-| You don't need to be a Python programmer, but having the ability to install python
-apps with the ``pip`` or ``pip3`` command is helpful because some editors and site generators
-are Python-based.
+**Installing Python apps with Pip**
 
-| **Git**
-| Some of the recipes in this guide use `Git <https://git-scm.com/>`__.
-  Git is very powerful, but doesn’t have to be hard to use. The recipes
-  in this guide emphasize simplicity. If you already know Git, you can
-  choose to do things differently. If you don’t know git, take a look at
-  `Git basics <../getting-started-git-basics>`__.
+You don't need to be a Python programmer, but having the ability to install python
+apps with the ``pip`` or ``pip3`` command is helpful because some editors and site generators are Python-based.
 
-| **Other documentation tools**
-| You can use reStructuredText to produce websites, blog posts, books, and even
+**Git**
+
+Some of the recipes in this guide use `Git <https://git-scm.com/>`__.
+Git is very powerful, but doesn’t have to be hard to use. The recipes
+in this guide emphasize simplicity. If you already know Git, you can
+choose to do things differently. If you don’t know git, take a look at
+`Git basics <../getting-started-git-basics>`__.
+
+**Other documentation tools**
+
+You can use reStructuredText to produce websites, blog posts, books, and even
 a wiki. You should know something about Acrobat, Google Drive, HTML, Microsoft
 Office, and other tools you might use to work with content originally written in
 reStructuredText.

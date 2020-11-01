@@ -15,19 +15,19 @@ Example:
 
 ::
 
-    +--------------------------+------------------------------------------+
-    |  Element                 |  Syntax                                  |
-    +==========================+==========================================+
-    |  Substitution definition |  ``.. |text| replacement``               |
-    +--------------------------+------------------------------------------+
-    |  Cross-reference target  |  ``.. _label:``                          |
-    |                          |                                          |
-    |                          |  ``Paragraph``                           |
-    +--------------------------+------------------------------------------+
-    |  Link target             |  ``.. _label: URL``                      |
-    +--------------------------+------------------------------------------+
-    |  Footnote or citation    |  ``.. [label] Footnote or citation text``|
-    +--------------------------+------------------------------------------+
+    +--------------------------+-------------------------------------+
+    |  Element                 |  Syntax                             |
+    +==========================+=====================================+
+    |  Substitution definition |  ``.. |text| replacement``          |
+    +--------------------------+-------------------------------------+
+    |  Cross-reference target  |  ``.. _label:``                     |
+    |                          |                                     |
+    |                          |  ``Paragraph``                      |
+    +--------------------------+-------------------------------------+
+    |  Link target             |  ``.. _label: URL``                 |
+    +--------------------------+-------------------------------------+
+    |  Footnote or citation    |  ``.. [label] Footnote or citation``|
+    +--------------------------+-------------------------------------+
 
 Simple tables
 --------------
@@ -88,6 +88,9 @@ Example:
 
        "``*emphasis*``", "*emphasis*"
        "``**strong**``", "**strong**"
+
+You can use a CSV table with an ``include`` directive to display comma-separated
+values from an external file as a table in a reStructuredText document.
 
 List table directive
 ^^^^^^^^^^^^^^^^^^^^

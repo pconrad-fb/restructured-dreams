@@ -10,8 +10,7 @@ reStructuredText
    links
    tables
    images
-   other-useful-directives
-
+**
 Like other markup languages, reStructuredText offers simple syntax for inline markup
 (emphasis, for example) and headings. *Interpreted
 text roles* and *explicit markup,* which includes *directives* are general extension mechanisms

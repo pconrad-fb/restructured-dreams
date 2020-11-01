@@ -20,16 +20,16 @@ Example:
 
 Standard roles include:
 
-* `:emphasis:` - usually displayed with italics, equivalent to \*emphasis*
-* `:literal:` - usually displayed in monospace, equivalent to \`\`literal``
-* `:code:` - marks the content as code in a formal language
-* `:math:` - allows the use of mathematical notation to display a formula
-* `:pep-reference:` - an HTTP reference to a Python enhancement proposal (PEP)
-* `:rfc-reference:` - an HTTP reference to an internet request for comments (RFC)
-* `:strong:` - usually displayed with bold, equivalent to \*\*strong**
-* `:subscript:` - displays smaller characters lower than the line of text
-* `:superscript:` - displays smaller characters higher than the line of text
-* `:title-reference:` - describes the titles of books and other materials
+* ``:emphasis:`` - usually displayed with italics, equivalent to \*emphasis*
+* ``:literal:`` - usually displayed in monospace, equivalent to \`\`literal``
+* ``:code:`` - marks the content as code in a formal language
+* ``:math:`` - allows the use of mathematical notation to display a formula
+* ``:pep-reference:`` - an HTTP reference to a Python enhancement proposal (PEP)
+* ``:rfc-reference:`` - an HTTP reference to an internet request for comments (RFC)
+* ``:strong:`` - usually displayed with bold, equivalent to \*\*strong**
+* ``:subscript:`` - displays smaller characters lower than the line of text
+* ``:superscript:`` - displays smaller characters higher than the line of text
+* ``:title-reference:`` - describes the titles of books and other materials
 
 The roles ``:emphasis:``, ``:literal:``, and ``:strong:`` are functionally  
 the same as their inline markup equivalents.

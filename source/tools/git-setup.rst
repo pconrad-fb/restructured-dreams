@@ -27,10 +27,8 @@ If Git is not installed, follow these steps.
    `Sourcetree <https://www.sourcetreeapp.com/>`__ or `GitHub
    Desktop <https://desktop.github.com/>`__.
 
-!!! hint You can use any Git client with any Git host, but some clients
-work especially well with specific hosts. For example:
-
-::
+.. Hint:: You can use any Git client with any Git host, but some clients
+   work especially well with specific hosts. For example:
 
    - Sourcetree and Bitbucket
    - GitHub Desktop and GitHub
@@ -46,35 +44,45 @@ with an online host and then *clone* it (create a local copy). Your
 collaborators can also clone the repository to their own computers, so
 everyone can keep in sync by pushing and pulling changes.
 
-=== “Bitbucket and Sourcetree”
+Bitbucket and Sourcetree
+^^^^^^^^^^^^^^^^^^^^^^^^
 
-::
+#. Sign up with Bitbucket (https://bitbucket.org/) and log on.
+#. Click the new repository button (the plus sign):  
 
-   1. Sign up with [Bitbucket](https://bitbucket.org/) and log on.
-   2. Click the new repository button (the plus sign):  
-     ![New repository buttoon](../img/recipes-git-repo-bb-add.png)
-   3. Type a repository name, make sure it's set to be a public repository, and 
+   .. image:: ../../img/recipes-git-repo-bb-add.png
+      :alt: New repository button
+
+#. Type a repository name, make sure it's set to be a public repository, and 
      click **Create repository**.
-   4. Choose or create a directory on your computer where you would like to keep your 
+#. Choose or create a directory on your computer where you would like to keep your 
       local copy of the project.
-   5. Click **Clone in Sourcetree**.  
-      !["Clone in Sourcetree" dialog](../img/recipes-git-wiki-bb-clone.png)
-   6. Choose a folder on your computer for the local copy of the repository
+#. Click **Clone in Sourcetree**.  
+
+   .. image:: ../../img/recipes-git-wiki-bb-clone.png
+      :alt: "Clone in Sourcetree" dialog
+
+#. Choose a folder on your computer for the local copy of the repository
       and click **Clone**.
 
-=== “GitHub and GitHub Desktop”
+GitHub and GitHub Desktop
+^^^^^^^^^^^^^^^^^^^^^^^^^
 
-::
+#. Sign up with GitHub (https://bitbucket.org/) and log on.
+#. Click the plus sign and select **New repository**:   
 
-   1. Sign up with [GitHub](https://bitbucket.org/) and log on.
-   2. Click the plus sign and select **New repository**:   
-      ![New repository menu](../img/github-new-repository.png)
-   1. Type a repository name, make sure it's set to be a public repository, and 
-     click **Create repository**.
-   1. Click **Set up in Desktop** to open the repository in GitHub Desktop:  
-      ![Set up in desktop button](../img/github-set-up-in-desktop.png)
-   6. Choose a folder on your computer for the local copy of the repository
-      and click **Clone**.
+   .. image:: ../../img/github-new-repository.png
+      :alt: New repository menu
+
+#. Type a repository name, make sure it's set to be a public repository, and 
+   click **Create repository**.
+#. Click **Set up in Desktop** to open the repository in GitHub Desktop:  
+
+   .. image:: ../../img/github-set-up-in-desktop.png
+      :alt: Set up in desktop button
+
+#. Choose a folder on your computer for the local copy of the repository
+   and click **Clone**.
 
 It might not look like much has happened, but you now have:
 
@@ -82,8 +90,3 @@ It might not look like much has happened, but you now have:
 -  A repository at an online Git host
 -  A local copy of the repository on your computer
 
-Next steps
-----------
-
--  Take a look at `Git basics <../getting-started-git-basics/>`__
--  Try setting up a `Git wiki <../../recipes/recipes-git-wiki>`__

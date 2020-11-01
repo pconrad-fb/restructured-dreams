@@ -1,63 +1,30 @@
 Build docs with Sphinx
 ======================
 
+Sphinx is a Python-based documentation generator that builds websites, ePub books, PDFs, and other formats from reStructuredText or Markdown. Sphinx adds directives like ``toctree`, ``index``, and ``glossary`` to help manage a group of documents together as part of a larger whole. In particular, the ``toctree`` directive establishes relationships between files to build an overall documentation structure. The root  of the ``toctree`` lives in the top level ``index.rst`` file in your ``source`` directory.
+
+After installing Sphinx (``pip install sphinx``), here's how to set up a project:
+
+#. Run the script ``sphinx-quickstart`` which prompts you with a few questions to help you set up a project, including a ``source`` directory for your files and a basic version of the configuration file ``conf.py`` and a master document, your top-level ``index.rst``.
+#. Create or copy files and directories containing your content. Organize it. TO DO write a doc about this.
+#. You'll want an ``index.rst`` in every folder.
+#. Figure out what to do about the TOC
+#. Pick a theme.
+
+
+
+A few things to know about reStructuredText and Sphinx:
+
+- Every document must have a title heading.
+- If you're going to use ``toctree``, you must use it on every file.
+- 
+
 https://thomas-cokelaer.info/tutorials/sphinx/quickstart.html
-
-Sphinx focuses on documentation, in particular handwritten documentation, however, Sphinx can also be used to generate blogs, homepages and even books. 
-
-The root directory of a Sphinx collection of plain-text document sources is called the source directory. This directory also contains the Sphinx configuration file conf.py, where you can configure all aspects of how Sphinx reads your sources and builds your documentation. 1
-
-Sphinx comes with a script called sphinx-quickstart that sets up a source directory and creates a default conf.py with the most useful configuration values from a few questions it asks you. 
-
-Every page needs a title! And must be in a toctree, all or nothing
-
-toctree is a reStructuredText directive, a very versatile piece of markup. Directives can have arguments, options and content.
-
-Arguments are given directly after the double colon following the directive?s name. Each directive decides whether it can have arguments, and how many.
-
-Options are given after the arguments, in form of a ?field list?. The maxdepth is such an option for the toctree directive.
-
-Content follows the options or arguments after a blank line. Each directive decides whether to allow content, and what to do with it.
-
-Originally, Sphinx was conceived for a single project, the documentation of the Python language. Shortly afterwards, it was made available for everyone as a documentation tool, but the documentation of Python modules remained deeply built in ? the most fundamental directives, like function, were designed for Python objects. Since Sphinx has become somewhat popular, interest developed in using it for many different purposes: C/C++ projects, JavaScript, or even reStructuredText markup (like in this documentation).
-
-While this was always possible, it is now much easier to easily support documentation of projects using different programming languages or even ones not supported by the main Sphinx distribution, by providing a domain for every such purpose.
-
-A domain is a collection of markup (reStructuredText directives and roles) to describe and link to objects belonging together, e.g. elements of a programming language. Directive and role names in a domain have names like domain:name, e.g. py:function. Domains can also provide custom indices (like the Python Module Index).
-
-Having domains means that there are no naming problems when one set of documentation wants to refer to e.g. C++ and Python classes. It also means that extensions that support the documentation of whole new languages are much easier to write.
-
-While Docutils provides a number of directives, Sphinx provides many more and uses directives as one of the primary extension mechanisms.
-
-Adding index terms to a paragraph in Sphinx looks like:
-
-::
-
-    .. index::
-        single: Programming languages
-        single: Compiling
-        single: Source code
-
-Since reST does not have facilities to interconnect several documents, or split documents into multiple output files, Sphinx uses a custom directive to add relations between the single files the documentation is made of, as well as tables of contents. The toctree directive is the central element.
-
-* The goal of this document is to give you a quick taste of what Sphinx is and how you might use it. When you?re done here, you can check out the installation guide followed by the intro to the default markup format used by Sphinx, reStucturedText.
 
 https://www.sphinx-doc.org/en/master/usage/quickstart.html#setting-up-the-documentation-sources
 
-* Sphinx comes with a script called sphinx-quickstart that sets up a source directory and creates a default conf.py with the most useful configuration values from a few questions it asks you. To use this, run:
-
-::
-
-    $ sphinx-quickstart
-
-.. Note:: Just do quickstart. Then you get the make file.
-
-Let?s assume you?ve run sphinx-quickstart. It created a source directory with conf.py and a master document, index.rst. The main function of the master document is to serve as a welcome page, and to contain the root of the ?table of contents tree? (or toctree). This is one of the main things that Sphinx adds to reStructuredText, a way to connect multiple files to a single hierarchy of documents.
-
-The next thing you should do is set up the folders yo uwant with some index files in them and start figuring out the structure of the content. Then you want to deal with the TOC.
-
-Dealing with the TOC
---------------------
+Managing the TOC tree
+---------------------
 
 Sphinx has this TOC thing. Unline Git Wiki format, if you want a folder, it's a parent page (like Confluence) not just a folder (like Git Wiki). So you have a couple choices:
 
@@ -71,10 +38,14 @@ On the top level index.rst, you include whatever top-level pages you want, inclu
 
 ::
 
+    reStructured Dreams
+    ===================
+    
     .. toctree::
        :includehidden:
     
-       02-getting-started
+       getting-started
+       rest/index
        tools/index
        recipes/index
        resources/index
@@ -83,13 +54,18 @@ Then on each index in a folder, you do this:
 
 ::
 
+    Tools
+    ================
+    
     .. toctree::
        :hidden:
     
-       22-restructuredtext-cheatsheet
-       23-templates
-       24-resources-glossary
-       25-links
+       editors
+       storage
+       git
+       git-setup
+       git-basics
+       publishing
 
 Finally, on those leaf pages, you do this:
 
@@ -98,11 +74,11 @@ Finally, on those leaf pages, you do this:
     .. toctree::
        :hidden:
 
-If you don't put a `.. toctree::` on every damn page, then your left nav goes bonkers when you hit a page without one. And you get a build warning too:
+If you don't put a title and a `.. toctree::` on every damn page, then your left nav goes bonkers when you hit a page without one. And you get a build warning too:
 
 ::
 
-    /home/pconrad/git/restructured-dreams/source/recipes/index.rst:4: WARNING: toctree contains reference to document 'recipes/19-recipes-slides' that doesn't have a title: no link will be generated
+    /home/pconrad/git/restructured-dreams/source/recipes/index.rst:4: WARNING: toctree contains reference to document 'recipes/sphinx' that doesn't have a title: no link will be generated
 
 
 Also don't forget that not all editors (based on DocUtils) understand the Sphinx directives, so you'll get this:
@@ -113,83 +89,130 @@ But if you do it right, you get this nice expanding/collapsing nav:
 
 .. image:: ../../img/sphinx-website-nav.png
 
-Pick a theme
+
+
+Building HTML 
+-------------------
+
+``sphinx-quickstart`` createes you a ``Makefile`` so you can just do::
+
+    make html
+
+If you don't have the``Makefile`` for some reason, use::
+
+    sphinx-build -b html source/ build/
+
+It tells you what's wrong. Example:
+
+::
+
+    $ sphinx-build -b html source/ build/
+    Running Sphinx v3.2.1
+    loading pickled environment... done
+    building [mo]: targets for 0 po files that are out of date
+    building [html]: targets for 2 source files that are out of date
+    updating environment: 1 added, 4 changed, 0 removed
+    reading sources... [100%] tools/index                                                          
+    /home/pconrad/git/restructured-dreams/source/recipes/13-recipes-hugo.rst:: WARNING: image file not readable: recipes/../../static/images/whatever.png
+    /home/pconrad/git/restructured-dreams/source/resources/22-restructuredtext-cheatsheet.rst:45: WARNING: image file not readable: path/to/image.jpg
+    looking for now-outdated files... none found
+    pickling environment... done
+    checking consistency... /home/pconrad/git/restructured-dreams/source/01-index.rst: WARNING: document isn't included in any toctree
+    /home/pconrad/git/restructured-dreams/source/rstest.rst: WARNING: document isn't included in any toctree
+    done
+    preparing documents... done
+    writing output... [100%] tools/index                                                           
+    generating indices...  genindexdone
+    writing additional pages...  searchdone
+    copying images... [100%] recipes/../../img/hugo-preview.png                                    
+    copying static files... ... done
+    copying extra files... done
+    dumping search index in English (code: en)... done
+    dumping object inventory... done
+    build succeeded, 4 warnings.
+    
+    The HTML pages are in build
+
+
+Building a PDF
+----------------
+
+Add to ``conf.py``:
+
+::
+
+    # -- Options for LaTeX output -------------------------------------------------
+    
+    latex_show_pagerefs = True
+    latex_show_urls = 'inline'
+
+Made sure to install ``latexmk``::
+
+   $ sudo apt-get install latexmk
+
+Not sure how to get rid of section numbering.
+
+You can do::
+
+    make latexpdf
+
+or
+
+::
+
+    sphinx-build -M latexpdf source/ build/
+
+
+.. image:: ../../img/sphinx-latex-pdf.png
+
+Themes
 ------------
 
 https://www.sphinx-doc.org/en/master/usage/theming.html
 
-Some themes aer built in. Go look at https://www.sphinx-doc.org to find a list and then just change the `html_theme` parameter in `source/conf.py`
+Some themes aer built in. Go look at https://www.sphinx-doc.org to find a list and then just change the ``html_theme`` parameter in ``source/conf.py``
 
-You can also set theme-specific options using the html_theme_options config value. These options are generally used to change the look and feel of the theme.
+You can also set theme-specific options using the ``html_theme_options`` config value. These options are generally used to change the look and feel of the theme.
 
 See https://www.sphinx-doc.org/en/master/usage/configuration.html#confval-html_theme_options
 
 You can use non-built-in themes
 
-If the theme does not come with Sphinx, it can be in two static forms or as a Python package. For the static forms, either a directory (containing theme.conf and other needed files), or a zip file with the same contents is supported. The directory or zipfile must be put where Sphinx can find it; for this there is the config value html_theme_path. This can be a list of directories, relative to the directory containing conf.py, that can contain theme directories or zip files. For example, if you have a theme in the file blue.zip, you can put it right in the directory containing conf.py and use this configuration:
+If the theme does not come with Sphinx, it can be in two static forms or as a Python package. For the static forms, either a directory (containing theme.conf and other needed files), or a zip file with the same contents is supported. The directory or zipfile must be put where Sphinx can find it; for this there is the config value ``html_theme_path``. This can be a list of directories, relative to the directory containing ``conf.py``, that can contain theme directories or zip files. For example, if you have a theme in the file ``blue.zip``, you can put it right in the directory containing ``conf.py`` and use this configuration::
 
-html_theme = "blue"
-html_theme_path = ["."]
+    html_theme = "blue"
+    html_theme_path = ["."]
 
-The third form is a Python package. If a theme you want to use is distributed as a Python package, you can use it after installing
+The third form is a Python package. If a theme you want to use is distributed as a Python package, you can use it after installing::
 
-# installing theme package
-$ pip install sphinxjp.themes.dotted
+    # installing theme package
+    $ pip install sphinxjp.themes.dotted
 
-Once installed, this can be used in the same manner as a directory or zipfile-based theme:
+Once installed, this can be used in the same manner as a directory or zipfile-based theme::
 
-html_theme = "dotted"
+    html_theme = "dotted"
+
+Other capabilities
+-----------------------
+
+Indexing
+^^^^^^^^^^^
 
 
-
-
-
-Doing a build 
---------------
-
-::
-
-    $ sphinx-build -b html source/ build/
+Adding index terms to a paragraph in Sphinx looks like:
 
 ::
 
-    $ make html
+    .. index::
+        single: Programming languages
+        single: Compiling
+        single: Source code
 
-
-Make targets
-------------
-
-::
-
-    $ make
-    Sphinx v3.2.1
-    Please use `make target' where target is one of
-      html        to make standalone HTML files
-      dirhtml     to make HTML files named index.html in directories
-      singlehtml  to make a single large HTML file
-      pickle      to make pickle files
-      json        to make JSON files
-      htmlhelp    to make HTML files and an HTML help project
-      qthelp      to make HTML files and a qthelp project
-      devhelp     to make HTML files and a Devhelp project
-      epub        to make an epub
-      latex       to make LaTeX files, you can set PAPER=a4 or PAPER=letter
-      latexpdf    to make LaTeX and PDF files (default pdflatex)
-      latexpdfja  to make LaTeX files and run them through platex/dvipdfmx
-      text        to make text files
-      man         to make manual pages
-      texinfo     to make Texinfo files
-      info        to make Texinfo files and run them through makeinfo
-      gettext     to make PO message catalogs
-      changes     to make an overview of all changed/added/deprecated items
-      xml         to make Docutils-native XML files
-      pseudoxml   to make pseudoxml-XML files for display purposes
-      linkcheck   to check all external links for integrity
-      doctest     to run all doctests embedded in the documentation (if enabled)
-      coverage    to run coverage check of the documentation (if enabled)
+Cross-references
+^^^^^^^^^^^^^^^^
 
 If you want to link to other files, use ref
-there's the general :ref: directive, documented here. They give this example:
+there's the general ``:ref:`` directive, documented here. They give this example:
 
 ::
 
@@ -207,6 +230,8 @@ Although the general hyperlinking mechanism offered by RST does work in Sphinx, 
     Using ref is advised over standard reStructuredText links to sections (like Section title) because it works across files, when section headings are changed, and for all builders that support cross-references.
 
 
+Glossary
+^^^^^^^^
 The Sphinx documentation generator provides a more flexible alternative to definition lists (see Glossaries).
 Glossaries
 
@@ -245,95 +270,7 @@ To automatically sort a glossary, include the following flag::
  .. glossary::
    :sorted:
 
-A build
--------
+Domains
+^^^^^^^^
 
-::
-
-    $ sphinx-build -b html source/ build/
-    Running Sphinx v3.2.1
-    loading pickled environment... done
-    building [mo]: targets for 0 po files that are out of date
-    building [html]: targets for 2 source files that are out of date
-    updating environment: 1 added, 4 changed, 0 removed
-    reading sources... [100%] tools/index                                                          
-    /home/pconrad/git/restructured-dreams/source/recipes/13-recipes-hugo.rst:: WARNING: image file not readable: recipes/../../static/images/whatever.png
-    /home/pconrad/git/restructured-dreams/source/resources/22-restructuredtext-cheatsheet.rst:45: WARNING: image file not readable: path/to/image.jpg
-    looking for now-outdated files... none found
-    pickling environment... done
-    checking consistency... /home/pconrad/git/restructured-dreams/source/01-index.rst: WARNING: document isn't included in any toctree
-    /home/pconrad/git/restructured-dreams/source/rstest.rst: WARNING: document isn't included in any toctree
-    done
-    preparing documents... done
-    writing output... [100%] tools/index                                                           
-    generating indices...  genindexdone
-    writing additional pages...  searchdone
-    copying images... [100%] recipes/../../img/hugo-preview.png                                    
-    copying static files... ... done
-    copying extra files... done
-    dumping search index in English (code: en)... done
-    dumping object inventory... done
-    build succeeded, 4 warnings.
-    
-    The HTML pages are in build
-
-Another build
--------------
-
-::
-
-    $ make html
-    Running Sphinx v3.2.1
-    loading pickled environment... done
-    building [mo]: targets for 0 po files that are out of date
-    building [html]: targets for 1 source files that are out of date
-    updating environment: 0 added, 9 changed, 0 removed
-    reading sources... [100%] tools/07-tools-git-basics                             
-    /home/pconrad/git/restructured-dreams/source/02.5-basics.rst:508: WARNING: Footnote [#] is not referenced.
-    /home/pconrad/git/restructured-dreams/source/02.5-basics.rst:509: WARNING: Footnote [#] is not referenced.
-    /home/pconrad/git/restructured-dreams/source/02.5-basics.rst:: WARNING: image file not readable: my-image.png
-    /home/pconrad/git/restructured-dreams/source/02.5-basics.rst:411: WARNING: image file not readable: gnu.png(options)
-    /home/pconrad/git/restructured-dreams/source/02.5-basics.rst:: WARNING: image file not readable: picture.png
-    /home/pconrad/git/restructured-dreams/source/02.5-basics.rst:: WARNING: image file not readable: tent.png
-    /home/pconrad/git/restructured-dreams/source/02.5-basics.rst:: WARNING: image file not readable: waves.png
-    /home/pconrad/git/restructured-dreams/source/02.5-basics.rst:: WARNING: image file not readable: peak.png
-    /home/pconrad/git/restructured-dreams/source/recipes/10-recipes-git-wiki.rst:197: WARNING: image file not readable: recipes/../img/recipes-git-wiki-create.png
-    /home/pconrad/git/restructured-dreams/source/recipes/10-recipes-git-wiki.rst:198: WARNING: image file not readable: recipes/../img/github-settings.png
-    /home/pconrad/git/restructured-dreams/source/recipes/10-recipes-git-wiki.rst:199: WARNING: image file not readable: recipes/../img/git-wikis.png
-    /home/pconrad/git/restructured-dreams/source/recipes/10-recipes-git-wiki.rst:200: WARNING: image file not readable: recipes/../img/recipes-git-repo-bb-clone-wiki.png
-    /home/pconrad/git/restructured-dreams/source/recipes/10-recipes-git-wiki.rst:201: WARNING: image file not readable: recipes/../img/github-wiki-button.png
-    /home/pconrad/git/restructured-dreams/source/recipes/10-recipes-git-wiki.rst:202: WARNING: image file not readable: recipes/../img/recipes-git-wiki-bb-something.png
-    /home/pconrad/git/restructured-dreams/source/recipes/11-recipes-centralized-workflow.rst:: WARNING: image file not readable: recipes/../img/git-centralized-workflow.png
-    /home/pconrad/git/restructured-dreams/source/recipes/12-recipes-gitflow.rst:17: WARNING: image file not readable: recipes/../img/github-flow.png
-    /home/pconrad/git/restructured-dreams/source/recipes/13-recipes-hugo.rst:199: WARNING: image file not readable: recipes/../img/hugo-preview.png
-    /home/pconrad/git/restructured-dreams/source/recipes/13-recipes-hugo.rst:217: WARNING: image file not readable: recipes/../../static/images/whatever.png
-    /home/pconrad/git/restructured-dreams/source/recipes/20-recipes-slides-dzslides.rst:110: WARNING: image file not readable: recipes/../img/slides-dzslides.png
-    /home/pconrad/git/restructured-dreams/source/recipes/20-recipes-slides-dzslides.rst:153: WARNING: image file not readable: recipes/../img/slides-dzslides-images.png
-    /home/pconrad/git/restructured-dreams/source/resources/22-restructuredtext-cheatsheet.rst:45: WARNING: image file not readable: path/to/image.jpg
-    /home/pconrad/git/restructured-dreams/source/tools/07-tools-git-basics.rst:33: WARNING: image file not readable: tools/../img/git-centralized-workflow.png
-    /home/pconrad/git/restructured-dreams/source/tools/07-tools-git-basics.rst:64: WARNING: image file not readable: tools/../img/github-flow.png
-    looking for now-outdated files... none found
-    pickling environment... done
-    checking consistency... /home/pconrad/git/restructured-dreams/source/01-index.rst: WARNING: document isn't included in any toctree
-    /home/pconrad/git/restructured-dreams/source/02.5-basics.rst: WARNING: document isn't included in any toctree
-    /home/pconrad/git/restructured-dreams/source/rstest.rst: WARNING: document isn't included in any toctree
-    done
-    preparing documents... done
-    writing output... [100%] tools/index                                            
-    /home/pconrad/git/restructured-dreams/source/02.5-basics.rst:: WARNING: Could not obtain image size. :scale: option is ignored.
-    /home/pconrad/git/restructured-dreams/source/recipes/index.rst:4: WARNING: toctree contains reference to document 'recipes/19-recipes-slides' that doesn't have a title: no link will be generated
-    /home/pconrad/git/restructured-dreams/source/recipes/index.rst:4: WARNING: toctree contains reference to document 'recipes/19-recipes-slides' that doesn't have a title: no link will be generated
-    /home/pconrad/git/restructured-dreams/source/recipes/index.rst:4: WARNING: toctree contains reference to document 'recipes/19-recipes-slides' that doesn't have a title: no link will be generated
-    /home/pconrad/git/restructured-dreams/source/recipes/index.rst:4: WARNING: toctree contains reference to document 'recipes/19-recipes-slides' that doesn't have a title: no link will be generated
-    /home/pconrad/git/restructured-dreams/source/recipes/index.rst:4: WARNING: toctree contains reference to document 'recipes/19-recipes-slides' that doesn't have a title: no link will be generated
-    /home/pconrad/git/restructured-dreams/source/recipes/index.rst:4: WARNING: toctree contains reference to document 'recipes/19-recipes-slides' that doesn't have a title: no link will be generated
-    /home/pconrad/git/restructured-dreams/source/recipes/index.rst:4: WARNING: toctree contains reference to document 'recipes/19-recipes-slides' that doesn't have a title: no link will be generated
-    generating indices...  genindexdone
-    writing additional pages...  searchdone
-    copying static files... ... done
-    copying extra files... done
-    dumping search index in English (code: en)... done
-    dumping object inventory... done
-    build succeeded, 34 warnings.
-    
-    The HTML pages are in build/html.
+Sphinx was originally designed for documenting the Python language. As Sphinx has grown in popularity for other purposes, it evolved to include the notion of *domains,* collections of reStructuredText directives and roles that support specific documentation contexts. The default domain is the Python domain, which is named ``py``. For general documentation needs, the domain probably won't affect you that much, but it's good to know that domains are there if you need them.

@@ -37,10 +37,8 @@ Git client. For example:
 -  `GitHub Desktop <https://desktop.github.com/>`__
 -  `Sourcetree <https://www.sourcetreeapp.com/>`__
 
-!!! hint While any Git client should work with any Git host, it’s not a
-bad idea to use the client and host that go together. For example:
-
-::
+.. Hint:: While any Git client should work with any Git host, it’s not a
+   bad idea to use the client and host that go together. For example:
 
    - Bitbucket and Sourcetree
    - GitHub and GitHub Desktop
@@ -75,7 +73,9 @@ What things mean in Git
 
 Here are a few basic Git terms you’ll see in some of the recipes.
 
-**Commit** As you make changes to the files you’re working on, saving
+**Commit** 
+
+As you make changes to the files you’re working on, saving
 periodically, you also tell Git from time to time that you want your
 changes tracked. This is called *committing* the changes, and is a
 little like “saving changes to Git.” Git makes it easy by noticing the
@@ -85,42 +85,48 @@ little note describing the changes so that people know what you did.
 
 A group of changes you’ve committed is also called a *commit.*
 
-| **Stage**
-| Before you commit changes, you tell Git which changes to track. This
-  is called *staging.* Since changes go with files, sometimes people
-  think of it as staging the files themselves—but it’s really the
-  changes that Git wants to know about. If you delete a file, that’s a
-  change too.
+**Stage**
 
-| **Repository**
-| When you have committed, your changes are stored in the local
-  *repository,* or *repo* for short. It’s just like that old central
-  repository, but it’s on your computer.
+Before you commit changes, you tell Git which changes to track. This
+is called *staging.* Since changes go with files, sometimes people
+think of it as staging the files themselves—but it’s really the
+changes that Git wants to know about. If you delete a file, that’s a
+change too.
 
-| **Push**
-| If you want other people to be able to work on your files, then you
-  need to put them in an online repository (such as Bitbucket, GitHub,
-  or GitLab). This is not *checking in* since the changes are already
-  committed to your local repository. This is called a *push* to a
-  *remote repository*.
+**Repository**
 
-| **Clone**
-| Once something is in an online repository, an authorized person can
-  *clone* their own copy of the whole repository and work on the files
-  locally.
+When you have committed, your changes are stored in the local
+*repository,* or *repo* for short. It’s just like that old central
+repository, but it’s on your computer.
 
-| **Pull**
-| As you work on a repository you’ve cloned, you *pull* the latest
-  changes from the remote repo to stay up to date.
+**Push**
 
-| **Branch**
-| Git lets people work in separate work streams called *branches* so
-  that they don’t interfere with each other’s work. A branch is just a
-  series of commits (and a commit is a group of changes). You’re always
-  working in a branch, even if there’s only one branch. When you have
-  several branches to work in, Git remembers the state of everything in
-  each branch so that when you switch between them everything is just
-  how you expect it.
+If you want other people to be able to work on your files, then you
+need to put them in an online repository (such as Bitbucket, GitHub,
+or GitLab). This is not *checking in* since the changes are already
+committed to your local repository. This is called a *push* to a
+*remote repository*.
+
+**Clone**
+
+Once something is in an online repository, an authorized person can
+*clone* their own copy of the whole repository and work on the files
+locally.
+
+**Pull**
+
+As you work on a repository you’ve cloned, you *pull* the latest
+changes from the remote repo to stay up to date.
+
+**Branch**
+
+Git lets people work in separate work streams called *branches* so
+that they don’t interfere with each other’s work. A branch is just a
+series of commits (and a commit is a group of changes). You’re always
+working in a branch, even if there’s only one branch. When you have
+several branches to work in, Git remembers the state of everything in
+each branch so that when you switch between them everything is just
+how you expect it.
 
 Creating a new branch is called *branching,* of course. The Git command
 for creating (or switching to) a branch is called, confusingly,
@@ -130,9 +136,10 @@ There are different branching strategies. Some are complicated; others
 are simple. The recipes in this guide use two simple branching
 strategies, described in `Git basics <../tools-git-basics/>`__.
 
-| **Merge**
-| If there’s more than one branch, there always comes a time to *merge,*
-  which means to add the changes from one branch into another.
+**Merge**
+
+If there’s more than one branch, there always comes a time to *merge,*
+which means to add the changes from one branch into another.
 
 Why branching is cool
 ~~~~~~~~~~~~~~~~~~~~~
@@ -172,7 +179,3 @@ When I switch back to ``test-branch``, it’s there:
 
 Branching is cool.
 
-Next steps
-----------
-
--  `Set up Git <../tools-git-setup/>`__

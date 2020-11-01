@@ -51,9 +51,10 @@ or paragraph you want to link to. For example:
 
 ::
 
-    .. _example:
+   .. _example:
 
-    This paragraph has the example in it. I want to be able to link to it.
+   This paragraph has the example in it. I want to be 
+   able to link to it.
 
 You can then create a link to the paragraph like this:
 
@@ -71,7 +72,8 @@ You can embed a link target in the body of text like this:
 
 ::
 
-   Here is an _`example` target. You can link to it like this: `example`_.
+   Here is an _`example` target. You can link 
+   to it like this: `example`_.
 
 If you use Sphinx, you'll find a useful role called ``:ref:`` that lets you link to
 labels in other files.
@@ -94,11 +96,9 @@ but this works:
 
    The `Example page`_ is a link to www.example.com, but so is example_!
 
-   .. _Example home page: http://www.example.com
-   .. _example: `Example home page`_
+   .. _Example page: http://www.example.com
+   .. _example: `Example page`_
 
-
-The bracketed URI must be preceded by whitespace and be the last text before the end string.
 
 Footnotes and citations
 -----------------------

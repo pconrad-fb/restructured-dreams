@@ -6,14 +6,11 @@ Editors
 
 Like other markup languages, reStructuredText works well with text editors and code editors, and a small number of purpose-built editors.
 
-Recommendations:
-
-- Atom is easy to install on any platform and there are packages available for reStructuredText
-  (click **Packages > Settings View > Install Packages/Themes** and then search). Atom also
-  provides a Project view (directories and files) and Git integration.
-- ReText is simpler than Atom, but doesn't provide Git integration or a view of directories and files.
-  Because ReText is a Python program, it is not always easy to install, but I have been able to
-  install and use it on Linux, macOS, and Windows.
+.. Hint:: 
+   Atom is easy to install on any platform and there are packages available for
+   reStructuredText (click **Packages > Settings View > Install Packages/Themes** 
+   and then search). Atom also provides a Project view (directories and files) 
+   and Git integration.
 
 Code editors
 ------------
