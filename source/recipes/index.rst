@@ -18,3 +18,5 @@ Recipes
    recipes-slides-dzslides
 
 You can do so many things with reST! Take notes? Git wiki? Manage docs with centralized and gitflow? Do Hugo? Sphinx? Pandoc word ebook pdf and web? Slides? DZSlides?
+
+Put structured TOC of recipes here
