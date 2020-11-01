@@ -3,6 +3,11 @@ Build docs with Sphinx
 
 Sphinx is a Python-based documentation generator that builds websites, ePub books, PDFs, and other formats from reStructuredText or Markdown. Sphinx adds directives like ``toctree`, ``index``, and ``glossary`` to help manage a group of documents together as part of a larger whole. In particular, the ``toctree`` directive establishes relationships between files to build an overall documentation structure. The root  of the ``toctree`` lives in the top level ``index.rst`` file in your ``source`` directory.
 
+Read the Docs
+
+    Read the Docs is a documentation hosting service based around Sphinx. They will host sphinx documentation, along with supporting a number of other features including version support, PDF generation, and more. The Getting Started guide is a good place to start.
+
+
 After installing Sphinx (``pip install sphinx``), here's how to set up a project:
 
 #. Run the script ``sphinx-quickstart`` which prompts you with a few questions to help you set up a project, including a ``source`` directory for your files and a basic version of the configuration file ``conf.py`` and a master document, your top-level ``index.rst``.
