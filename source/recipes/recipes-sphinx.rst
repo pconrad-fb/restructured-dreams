@@ -165,6 +165,25 @@ or
 
 .. image:: ../../img/sphinx-latex-pdf.png
 
+Building an ePub
+----------------
+
+::
+
+    make epub
+
+or
+
+::
+    sphinx-build -b epub source/ build/
+
+Here's what it looks like opened in Sigil
+
+Grab Sigil or epub related stuff from md-dreams
+
+.. image:: ../../img/sphinx-epub-in-sigil.png
+
+
 Themes
 ------------
 
