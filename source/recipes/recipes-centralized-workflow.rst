@@ -16,7 +16,9 @@ In this workflow, everyone works on the same branch. This makes things
 easy for simple collaboration.
 
 .. Note::
-   If you’re publishing a large website or documentation set in a production environment with with a substantial number of collaborators,you should consider using `GitHub Flow <../recipes-gitflow/>`__ instead.
+   If you’re publishing a large website or documentation set in a production
+   environment with a substantial number of collaborators,you should consider
+   using `GitHub Flow <../recipes-gitflow/>`__ instead.
 
 Ingredients
 -----------
@@ -26,7 +28,12 @@ Ingredients
 * Sphinx or Pandoc
 
 .. hint::
-   Plan ahead based on the publishing tool you want to use. If you’re planning to use a wiki, MkDocs, or Hugo, organize your docs in `Git wiki structure <../../tools/tools-publishing#git-wiki-structure>`__ and add YAML frontmatter from the start. If you’re creating large documents with Pandoc, think about whether you need to work on content in pieces and then use Pandoc to assemble everything.
+   Plan ahead based on the publishing tool you want to use. If you’re planning
+   to use a wiki, MkDocs, or Hugo, organize your docs in
+   `Git wiki structure <../../tools/tools-publishing#git-wiki-structure>`__
+   and add YAML frontmatter from the start. If you’re creating large documents
+   with Pandoc, think about whether you need to work on content in pieces and
+   then use Pandoc to assemble everything.
 
 Working with content
 --------------------
