@@ -1,47 +1,62 @@
 Build docs with Sphinx
 ======================
 
-Sphinx is a Python-based documentation generator that builds websites, ePub books, PDFs, and other formats from reStructuredText or Markdown. Sphinx adds directives like ``toctree`, ``index``, and ``glossary`` to help manage a group of documents together as part of a larger whole. In particular, the ``toctree`` directive establishes relationships between files to build an overall documentation structure. The root  of the ``toctree`` lives in the top level ``index.rst`` file in your ``source`` directory.
+Sphinx is a Python-based documentation generator that builds websites, ePub books, PDFs, and other formats from reStructuredText or Markdown. Sphinx adds directives like ``toctree``, ``index``, and ``glossary`` to reStructuredText so you can manage a group of documents together as part of a larger set. 
 
-Read the Docs
+You can install Sphinx using the Python ``pip`` command:
 
-    Read the Docs is a documentation hosting service based around Sphinx. They will host sphinx documentation, along with supporting a number of other features including version support, PDF generation, and more. The Getting Started guide is a good place to start.
+   ``pip install sphinx``
 
+Once Sphinx is installed, you can do the following:
 
-After installing Sphinx (``pip install sphinx``), here's how to set up a project:
+- Run ``sphinx-quickstart`` to create a new documentation project
+- Add content files and folders to the ``source`` directory
+- Use the ``toctree`` directive to structure the documentation (and set up navigation)
+- Choose a theme
+- Build the documentation in HTML, PDF, ePub, and other formats 
 
-#. Run the script ``sphinx-quickstart`` which prompts you with a few questions to help you set up a project, including a ``source`` directory for your files and a basic version of the configuration file ``conf.py`` and a master document, your top-level ``index.rst``.
-#. Create or copy files and directories containing your content. Organize it. TO DO write a doc about this.
-#. You'll want an ``index.rst`` in every folder.
-#. Figure out what to do about the TOC
-#. Pick a theme.
+Sphinx is pretty straightforward. The one thing that's a little finicky is using the ``toctree`` directive to structure the navigation. There are many approaches, but I've chosen one that I feel is easy and sensible to document below.
 
+There is also a service called Read the Docs (https://readthedocs.org/) that can help you create, build, and host Sphinx-based documentation.
 
+Sphinx-quickstart
+---------------------------
 
-A few things to know about reStructuredText and Sphinx:
+Once you've installed Sphinx, run the script ``sphinx-quickstart``, which asks you a few questions and then uses your answers to set up a basic documentation project, including:
 
-- Every document must have a title heading.
-- If you're going to use ``toctree``, you must use it on every file.
-- 
+   * A ``source`` directory for your files
+   * A basic configuration file ``conf.py`` 
+   * A main document, your top-level ``index.rst`` file  
+   * Makefiles, which make it easier to build your documentation
 
-https://thomas-cokelaer.info/tutorials/sphinx/quickstart.html
+After you run the ``sphinx-quickstart`` script, you're ready to start building your documentation structure by adding files and folders to the ``source`` directory and creating navigational structure with the ``toctree`` directive.
 
-https://www.sphinx-doc.org/en/master/usage/quickstart.html#setting-up-the-documentation-sources
+The toctree directive
+------------------------
 
-Managing the TOC tree
----------------------
+No matter how you organize your ``source`` directory of reStructuredText files, it is the ``toctree`` directive that determines the structure used to build the documentation. The root  of the ``toctree`` goes in the top level ``index.rst`` file in your ``source`` directory. 
 
-Sphinx has this TOC thing. Unline Git Wiki format, if you want a folder, it's a parent page (like Confluence) not just a folder (like Git Wiki). So you have a couple choices:
+Some parsers don't understand Sphinx directives such as ``toctree``, so you'll
+sometimes see errors like this, which you can ignore:
 
-* Everything is flat, with a TOC on the index page
-* Everthing's in folders but the navigation is flat
-* Nice hierarchical navigation
+.. image:: ../../img/unknown-directive-toctree.png
 
-The way I found to do that last one is to put things in folders, then every folder gets an `index.rst` page. Because it's really a page, you need some content there. 
+One simple option for structuring your documentation is to create a single ``toctree`` in the top-level ``index.rst`` pointing to other files and folders in the ``source`` directory. The result is a flat structure, where all the generated pages are navigational peers. 
 
-On the top level index.rst, you include whatever top-level pages you want, including the indexes in the folders:
+Hierarchical navigation
+^^^^^^^^^^^^^^^^^^^^^^^
 
-::
+To create hierarchical navigation, organize your reStructuredText files into folders, each one of which contains an ``index.rst`` file with its own ``toctree`` directive, with a top-level ``index.rst`` and ``toctree`` to pull everything together.
+
+Here are the rules:
+
+- Every folder gets an ``index.rst`` file, which functions as an overview of the content in the folder.
+- Every ``index.rst`` file gets a ``toctree`` directive.
+- Every reStructuredText file must have a title.
+- Every reStructuredText file you want to appear in the navigation must appear in the ``toctree`` directive in its local ``index.rst`` file.
+- The ``toctree`` in the top-level ``index.rst`` governs the overall structure of the navigation. 
+
+The top-level ``toctree`` (that is, the ``toctree`` in ``source/index.rst``) might look like this::
 
     reStructured Dreams
     ===================
@@ -55,12 +70,14 @@ On the top level index.rst, you include whatever top-level pages you want, inclu
        recipes/index
        resources/index
 
-Then on each index in a folder, you do this:
+Each filename is listed without the file extension. For example, ``getting-started`` refers to ``getting-started.rst`` in the source directory with the ``index.rst`` where this ``toctree`` appears. 
 
-::
+On subsequent lines, the index file of each folder is listed so that Sphinx knows where to find the other ``toctree`` directives. The index file of each folder is referred to as you might expect, with a local path. For example, ``rest/index`` is a local path from inside the ``source`` directory to ``source/rest/index.rst``. 
 
-    Tools
-    ================
+In each folder's ``index.rst`` file, add a ``toctree`` that lists the files to include in that part of the navigation. Example::
+
+    reST
+    ====
     
     .. toctree::
        :hidden:
@@ -72,44 +89,163 @@ Then on each index in a folder, you do this:
        git-basics
        publishing
 
-Finally, on those leaf pages, you do this:
+In the above ``index.rst`` file, the ``toctree`` directive lists other pages in the folder and the order in which to include them. In the navigational hierarchy, the titles of those reStructuredText pages will be children of the title of this ``index.rst`` page ("reST," in this case).
 
-::
+You can of course use this method to create navigation into a deep structure with folders of folders of folders and so on, but it is probably better to keep things simple.
+
+Finally, on each lowest-level page, add a hidden ``toctree`` directive. This lets Sphinx add the page's headers to the navigation. Example::
 
     .. toctree::
        :hidden:
 
-If you don't put a title and a `.. toctree::` on every damn page, then your left nav goes bonkers when you hit a page without one. And you get a build warning too:
+.. note:: If you don't put a title and a ``.. toctree::`` on every page, then your navigation will not behave as you expected and you will get warnings during the build process.
 
-::
+..
+      /home/pconrad/git/restructured-dreams/source/recipes/index.rst:4: WARNING: toctree contains reference to document 'recipes/sphinx' that doesn't have a title: no link will be generated
 
-    /home/pconrad/git/restructured-dreams/source/recipes/index.rst:4: WARNING: toctree contains reference to document 'recipes/sphinx' that doesn't have a title: no link will be generated
-
-
-Also don't forget that not all editors (based on DocUtils) understand the Sphinx directives, so you'll get this:
-
-.. image:: ../../img/unknown-directive-toctree.png
-
-But if you do it right, you get this nice expanding/collapsing nav:
+If you create all the ``toctree`` directives correctly in all the right places, Sphinx rewards you with nice left-hand navigation:
 
 .. image:: ../../img/sphinx-website-nav.png
 
+Themes
+------------
 
+Like other documentation generators, Sphinx provides themes so you can customize the way your docs look. There is a list of built-in themes on the Sphinx website (start at https://www.sphinx-doc.org).
 
-Building HTML 
+To use a built-in theme, just change the ``html_theme`` parameter in ``source/conf.py`` to the theme name. Each theme has options that you can set in the ``html_theme_options`` parameter.
+
+Additional themes come in three forms:
+
+- A Python package
+- A directory containing ``theme.conf`` and other needed files
+- A Zip file containing ``theme.conf`` and other needed files
+
+To use a theme that comes in a Python package, just install it with ``pip``. Example::
+
+    $ pip install sphinxjp.themes.theme_name
+
+Once it's installed, you can use it by setting the ``html_theme`` parameter in ``config.py``. Example::
+
+    html_theme = "theme_name"
+
+To use a theme that comes in a directory or Zip file, use the parameter ``html_theme_path`` in ``config.py`` to tell Sphinx where to find the theme. For example, if you place the theme directory or Zip file in the same directory as ``config.py``, you might add the following parameters::
+
+    html_theme = "theme_name"
+    html_theme_path = ["."]
+
+A few useful features
+-----------------------
+
+Sphinx adds a number of capabilities that make it easier to manage large documentation projects. Here are three that are especially useful: 
+
+- Index
+- Ref
+- Glossary
+
+Index 
+^^^^^^^^^^^
+
+The ``index`` directive lets you add index entries for a paragraph. Here is a simple example::
+
+    .. index::
+        single: desserts; pie
+        single: delicious things
+
+Placing the above directive near a paragraph would create two entries in the index:
+
+- A sub-entry "pie" in the "desserts" entry
+- A "delicious things" entry
+
+Basic index entry types
+"""""""""""""""""""""""
+
++----------------------------------------------------+---------------------------------------------+
+|  Type                                              | Purpose                                     |
++====================================================+=============================================+
+| ``single:`` {term}                                 | A single entry for "term"                   |
++----------------------------------------------------+---------------------------------------------+
+| ``single:`` {term 1}\ ``;`` {term 2}               | A sub-entry for "term 2" under "term 1"     |
++----------------------------------------------------+---------------------------------------------+
+| ``pair:`` {term 1}\ ``;`` {term 2}                 | Two entries:                                |
+|                                                    |                                             |
+|                                                    |    - A sub-entry for "term 2" under "term 1"|
+|                                                    |    - A sub-entry for "term 1" under "term 2"|
++----------------------------------------------------+---------------------------------------------+
+|``triple:`` {term 1}\ ``;`` {term 2}\ ``;`` {term 3}| Three entries, similar to ``pair``          |
++----------------------------------------------------+---------------------------------------------+
+
+Ref
+^^^^^^^^^^^^^^^^
+
+The ``:ref:`` role lets you create links between headings, even if they are in different files. This is very useful when working with large documentation projects. There are two parts:
+
+- The label
+- The reference
+
+To create a label, add a directive at the beginning of the section you want to reference::
+
+    .. _my-label:
+
+    Section to cross-reference
+    --------------------------
+
+    This is the text of the section.
+
+Elsewhere, you can use the ``:ref:`` role to link to the labeled section::
+
+    For more information, see :ref:`my-reference-label`.
+
+Because you don't have to change the label when you change the text of a heading, the ``:ref:`` role makes cross-references easier to manage as a document set evolves.
+
+Glossary
+^^^^^^^^
+
+The ``glossary`` directive lets you create a list of terms and definitions that you can then reference from the text.
+
+For example, a glossary might look like this::
+
+ .. glossary::
+    :sorted:
+
+   aardvark 
+      An animal that eats ants.
+
+   accordion
+      A musical instrument that makes ants run away.
+
+The ``:sorted:`` option sorts the glossary into alphabetical order automatically.
+
+You can use the ``:term:`` role to link from terms in the text to their entries in the glossary. Example::
+
+    An :term:`aardvark` prefers not to play the :term:`accordion` because
+    it makes ants run away.
+
+Building your docs 
 -------------------
 
-``sphinx-quickstart`` createes you a ``Makefile`` so you can just do::
+There are two ways to build your docs:
+
+- The ``sphinx-quickstart`` script creates a ``Makefile`` so you can build your docs by typing ``make`` and the desired output format. 
+- If you don't have the ``Makefile`` for some reason, you can use ``sphinx-build`` instead, specifying the output format, the source directory, and the build directory where the resulting files should be saved.
+
+The two commands are equivalent. In other words, to build the HTML version of your documentation, you can type either:: 
 
     make html
 
-If you don't have the``Makefile`` for some reason, use::
+or::
 
     sphinx-build -b html source/ build/
 
-It tells you what's wrong. Example:
+Building HTML
+^^^^^^^^^^^^^
 
-::
+To build the HTML version of your documentation, type::
+
+    make HTML
+
+While Sphinx builds the HTML, it lets you know what it's doing and whether there are any errors or warnings you might want to pay attention to. This is useful for making sure you've included all the ``.rst`` files in the ``toctree`` to set up your navigation properly.
+
+Here's an example (I used ``sphinx-build`` instead of ``make``)::
 
     $ sphinx-build -b html source/ build/
     Running Sphinx v3.2.1
@@ -138,163 +274,51 @@ It tells you what's wrong. Example:
     
     The HTML pages are in build
 
-
-Building a PDF
-----------------
-
-Add to ``conf.py``:
-
-::
-
-    # -- Options for LaTeX output -------------------------------------------------
-    
-    latex_show_pagerefs = True
-    latex_show_urls = 'inline'
-
-Made sure to install ``latexmk``::
-
-   $ sudo apt-get install latexmk
-
-Not sure how to get rid of section numbering.
-
-You can do::
-
-    make latexpdf
-
-or
-
-::
-
-    sphinx-build -M latexpdf source/ build/
-
-
-.. image:: ../../img/sphinx-latex-pdf.png
-
 Building an ePub
-----------------
+^^^^^^^^^^^^^^^^
 
-::
+Building an ePub is as easy as building HTML. Just use ``make``::
 
     make epub
 
-or
+If that doesn't work for some reason, you can use ``sphinx-build``::
 
-::
     sphinx-build -b epub source/ build/
 
-Here's what it looks like opened in Sigil
-
-Grab Sigil or epub related stuff from md-dreams
+You can open the ePub file in a reader, or edit it with an ePub editor such as Sigil.
 
 .. image:: ../../img/sphinx-epub-in-sigil.png
 
+Building a PDF
+^^^^^^^^^^^^^^
 
-Themes
-------------
+Building a PDF is fairly straightforward in Linux, but can be complicated in macOS or Windows. In any case, the formatting options seem limited. For example, I was not able to figure out how to remove numbering from section headings. If you want to create a PDF and have some control over formatting, you might consider using Pandoc to convert the reStructuredText files for use in a tool like Microsoft Word or LibreOffice Writer.
 
-https://www.sphinx-doc.org/en/master/usage/theming.html
+Building a PDF in Linux
+"""""""""""""""""""""""
 
-Some themes aer built in. Go look at https://www.sphinx-doc.org to find a list and then just change the ``html_theme`` parameter in ``source/conf.py``
+If you still want to build a PDF using Sphinx in Linux, here is how to do it:
 
-You can also set theme-specific options using the ``html_theme_options`` config value. These options are generally used to change the look and feel of the theme.
+#. Install a PDF rendering engine such as ``latexmk``. For example (Ubuntu/Debian)::
 
-See https://www.sphinx-doc.org/en/master/usage/configuration.html#confval-html_theme_options
+   $ sudo apt-get install latexmk
 
-You can use non-built-in themes
+#. Set some options for LaTeX output in ``conf.py``. I recommend at least the following::
 
-If the theme does not come with Sphinx, it can be in two static forms or as a Python package. For the static forms, either a directory (containing theme.conf and other needed files), or a zip file with the same contents is supported. The directory or zipfile must be put where Sphinx can find it; for this there is the config value ``html_theme_path``. This can be a list of directories, relative to the directory containing ``conf.py``, that can contain theme directories or zip files. For example, if you have a theme in the file ``blue.zip``, you can put it right in the directory containing ``conf.py`` and use this configuration::
+    latex_show_pagerefs = True
+    latex_show_urls = 'inline'
 
-    html_theme = "blue"
-    html_theme_path = ["."]
+#. Use ``make`` to create the PDF::
 
-The third form is a Python package. If a theme you want to use is distributed as a Python package, you can use it after installing::
-
-    # installing theme package
-    $ pip install sphinxjp.themes.dotted
-
-Once installed, this can be used in the same manner as a directory or zipfile-based theme::
-
-    html_theme = "dotted"
-
-Other capabilities
------------------------
-
-Indexing
-^^^^^^^^^^^
+    make latexpdf
 
 
-Adding index terms to a paragraph in Sphinx looks like:
+If ``make`` doesn't work for some reason, you can use ``sphinx-build``::
 
-::
+    sphinx-build -M latexpdf source/ build/
 
-    .. index::
-        single: Programming languages
-        single: Compiling
-        single: Source code
+The result is a fairly basic PDF with numbered headings:
 
-Cross-references
-^^^^^^^^^^^^^^^^
-
-If you want to link to other files, use ref
-there's the general ``:ref:`` directive, documented here. They give this example:
-
-::
-
-    .. _my-reference-label:
-
-    Section to cross-reference
-    --------------------------
-
-    This is the text of the section.
-
-    It refers to the section itself, see :ref:`my-reference-label`.
-
-Although the general hyperlinking mechanism offered by RST does work in Sphinx, the documentation recommends against using it when using Sphinx:
-
-    Using ref is advised over standard reStructuredText links to sections (like Section title) because it works across files, when section headings are changed, and for all builders that support cross-references.
+.. image:: ../../img/sphinx-latex-pdf.png
 
 
-Glossary
-^^^^^^^^
-The Sphinx documentation generator provides a more flexible alternative to definition lists (see Glossaries).
-Glossaries
-
-The Sphinx ..glossary:: directive contains a reST definition-list-like markup with terms and definitions.
-
-See the following example::
-
- .. glossary::
-
-   environment
-      A structure where information about all documents under the root is
-      saved, and used for cross-referencing.  The environment is pickled
-      after the parsing stage, so that successive runs only need to read
-      and parse new and changed documents.
-
-   source directory
-      The directory which, including its subdirectories, contains all
-      source files for one Sphinx project.
-
-The definitions will then be used in cross-references with the :term: role. For example:
-
-The \:term:`source directory` for this project is ...
-
-In contrast to regular definition lists, a glossary supports multiple terms per entry and inline markup is allowed in terms. You can link to all of the terms. For example::
-
- .. glossary::
-
-   term 1
-   term 2
-      Definition of both terms.
-
-When the glossary is sorted, the first term determines the sort order.
-
-To automatically sort a glossary, include the following flag::
-
- .. glossary::
-   :sorted:
-
-Domains
-^^^^^^^^
-
-Sphinx was originally designed for documenting the Python language. As Sphinx has grown in popularity for other purposes, it evolved to include the notion of *domains,* collections of reStructuredText directives and roles that support specific documentation contexts. The default domain is the Python domain, which is named ``py``. For general documentation needs, the domain probably won't affect you that much, but it's good to know that domains are there if you need them.

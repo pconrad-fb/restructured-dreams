@@ -29,3 +29,7 @@ Git
 -  `Sourcetree <https://www.sourcetreeapp.com/>`__
 -  `The Git Book <https://git-scm.com/book/en/v2>`__
 
+Other tools
+
+- `Read the Docs <https://readthedocs.org/)>`__
+
